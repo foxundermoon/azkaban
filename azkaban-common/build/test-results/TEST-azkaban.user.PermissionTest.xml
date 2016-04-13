@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.user.PermissionTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:26" hostname="zexinBian-MacBook-Pro.local" time="0.002">
+  <properties/>
+  <testcase name="testListPermissionCreation" classname="azkaban.user.PermissionTest" time="0.0"/>
+  <testcase name="testEmptyPermissionCreation" classname="azkaban.user.PermissionTest" time="0.0"/>
+  <testcase name="testToAndFromObject" classname="azkaban.user.PermissionTest" time="0.0"/>
+  <testcase name="testSinglePermissionCreation" classname="azkaban.user.PermissionTest" time="0.0"/>
+  <testcase name="testFlags" classname="azkaban.user.PermissionTest" time="0.0"/>
+  <testcase name="testRemovePermission" classname="azkaban.user.PermissionTest" time="0.0"/>
+  <testcase name="testRemovePermissionByName" classname="azkaban.user.PermissionTest" time="0.0"/>
+  <system-out><![CDATA[Compare READ,EXECUTE and READ,EXECUTE
+Compare READ and READ
+Compare WRITE,READ and WRITE,READ
+Compare WRITE,READ and WRITE,READ
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

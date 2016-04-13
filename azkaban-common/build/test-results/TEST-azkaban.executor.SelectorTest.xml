@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.executor.SelectorTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:40:58" hostname="zexinBian-MacBook-Pro.local" time="0.195">
+  <properties/>
+  <testcase name="testCreatingExectorfilterObjectWInvalidList" classname="azkaban.executor.SelectorTest" time="0.005"/>
+  <testcase name="testExecutorSelectorE2E" classname="azkaban.executor.SelectorTest" time="0.038"/>
+  <testcase name="testCreatingExectorComparatorObjectWInvalidWeight" classname="azkaban.executor.SelectorTest" time="0.001"/>
+  <testcase name="testCreatingExectorComparatorObject" classname="azkaban.executor.SelectorTest" time="0.001"/>
+  <testcase name="testCreatingExecutorSelectorWithEmptyFilterComparatorList" classname="azkaban.executor.SelectorTest" time="0.001"/>
+  <testcase name="testSelectorEmptyList" classname="azkaban.executor.SelectorTest" time="0.007"/>
+  <testcase name="testExecutorFilterWithNullInputs" classname="azkaban.executor.SelectorTest" time="0.002"/>
+  <testcase name="testSelectorListWithItemsThatAreReferenceEqual" classname="azkaban.executor.SelectorTest" time="0.005"/>
+  <testcase name="testExecutorComparer" classname="azkaban.executor.SelectorTest" time="0.045"/>
+  <testcase name="testSelectorListWithItemsThatAreEqualInValue" classname="azkaban.executor.SelectorTest" time="0.01"/>
+  <testcase name="testExecutorFilter" classname="azkaban.executor.SelectorTest" time="0.002"/>
+  <testcase name="testExecutorInfoJsonParser" classname="azkaban.executor.SelectorTest" time="0.046"/>
+  <testcase name="testSelectorsignleCandidate" classname="azkaban.executor.SelectorTest" time="0.006"/>
+  <testcase name="testCreatingExectorfilterObject" classname="azkaban.executor.SelectorTest" time="0.0"/>
+  <testcase name="testSelectorListWithNullValue" classname="azkaban.executor.SelectorTest" time="0.003"/>
+  <testcase name="testCreatingExectorComparatorObjectWInvalidName" classname="azkaban.executor.SelectorTest" time="0.002"/>
+  <testcase name="testExecutorComparerResisterComparerWInvalidWeight" classname="azkaban.executor.SelectorTest" time="0.001"/>
+  <testcase name="testSelector" classname="azkaban.executor.SelectorTest" time="0.016"/>
+  <system-out><![CDATA[835 [Test worker] ERROR azkaban.executor.selector.CandidateFilter  - failed to initialize executor filter as the filter implementation for requested factor 'notExistingFilter' doesn't exist.
+844 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'StaticRemainingFlowSize'.
+844 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'CpuStatus'.
+844 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'MinimumFreeMemory'.
+845 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '1'
+847 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'CpuUsage'. Weight = '1'
+848 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'NumberOfAssignedFlowComparator'. Weight = '1'
+849 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'LastDispatched'. Weight = '1'
+849 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+849 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 3
+850 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'host1:80 (id: 1)' with factor filter for 'ExecutorFilter'
+850 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: StaticRemainingFlowSize] filter result : true 
+850 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: CpuStatus] filter result : true 
+850 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: MinimumFreeMemory] filter result : true 
+850 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+851 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'host2:80 (id: 2)' with factor filter for 'ExecutorFilter'
+851 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: StaticRemainingFlowSize] filter result : true 
+851 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: CpuStatus] filter result : true 
+852 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: MinimumFreeMemory] filter result : true 
+852 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+852 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'host3:80 (id: 3)' with factor filter for 'ExecutorFilter'
+857 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: StaticRemainingFlowSize] filter result : true 
+857 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: CpuStatus] filter result : true 
+858 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: MinimumFreeMemory] filter result : true 
+858 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+859 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 3
+859 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'host2:80 (id: 2)' with 'host1:80 (id: 1)',  total weight = 4 
+860 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 1)
+860 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: NumberOfAssignedFlowComparator] compare result : 0 (current score 0 vs 1)
+860 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: LastDispatched] compare result : 0 (current score 0 vs 1)
+861 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: CpuUsage] compare result : -1 (current score 0 vs 2)
+861 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 2 
+861 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'host3:80 (id: 3)' with 'host1:80 (id: 1)',  total weight = 4 
+862 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+862 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: NumberOfAssignedFlowComparator] compare result : 0 (current score 0 vs 0)
+862 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: LastDispatched] compare result : 0 (current score 0 vs 0)
+862 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: CpuUsage] compare result : -1 (current score 0 vs 1)
+863 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 1 
+863 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected host1:80 (id: 1)
+863 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+864 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 3
+864 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'host1:80 (id: 1)' with factor filter for 'ExecutorFilter'
+865 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: StaticRemainingFlowSize] filter result : true 
+865 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: CpuStatus] filter result : true 
+866 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: MinimumFreeMemory] filter result : false 
+867 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+867 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'host2:80 (id: 2)' with factor filter for 'ExecutorFilter'
+868 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: StaticRemainingFlowSize] filter result : true 
+869 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: CpuStatus] filter result : true 
+869 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: MinimumFreeMemory] filter result : true 
+870 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+870 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'host3:80 (id: 3)' with factor filter for 'ExecutorFilter'
+871 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: StaticRemainingFlowSize] filter result : true 
+872 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: CpuStatus] filter result : true 
+872 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: MinimumFreeMemory] filter result : true 
+873 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+873 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 2
+874 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'host3:80 (id: 3)' with 'host2:80 (id: 2)',  total weight = 4 
+874 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 1 vs 0)
+874 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: NumberOfAssignedFlowComparator] compare result : 0 (current score 1 vs 0)
+875 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: LastDispatched] compare result : 0 (current score 1 vs 0)
+875 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: CpuUsage] compare result : 0 (current score 1 vs 0)
+875 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 1 vs 0 
+875 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected host3:80 (id: 3)
+876 [Test worker] ERROR azkaban.executor.selector.CandidateComparator  - failed to create instance of FactorComparator, at least one of the input paramters are invalid
+877 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '1'
+877 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'CpuUsage'. Weight = '1'
+877 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'NumberOfAssignedFlowComparator'. Weight = '1'
+877 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'LastDispatched'. Weight = '1'
+878 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+878 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 3
+878 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - skipping the candidate filtering as the filter object is not specifed.
+878 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 3
+879 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate comparator is not specified, default hash code comparator class will be used.
+879 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected host3:80 (id: 3)
+880 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredProprity'.
+881 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingMemory'.
+882 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingTmpSpace'.
+883 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredTotalMemory'.
+884 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '3'
+885 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Priority'. Weight = '4'
+885 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'RemainingTmp'. Weight = '1'
+885 [Test worker] ERROR azkaban.executor.selector.CandidateComparator  - failed to getNext candidate as the passed candidateList is null or empty.
+886 [Test worker] ERROR azkaban.executor.selector.CandidateComparator  - failed to getNext candidate as the passed candidateList is null or empty.
+886 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredProprity'.
+886 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingMemory'.
+887 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingTmpSpace'.
+887 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredTotalMemory'.
+887 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor1' with factor filter for 'Mockfilter'
+887 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+887 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+887 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering '(null)' with factor filter for 'Mockfilter'
+888 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+888 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+888 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredProprity'.
+889 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingMemory'.
+889 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingTmpSpace'.
+889 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredTotalMemory'.
+889 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '3'
+889 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Priority'. Weight = '4'
+890 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'RemainingTmp'. Weight = '1'
+890 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+890 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 2
+890 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX' with factor filter for 'Mockfilter'
+890 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+890 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+890 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+891 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+891 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+891 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX' with factor filter for 'Mockfilter'
+891 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+891 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+891 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+892 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+892 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+892 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 2
+892 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'ExecutorX' with 'ExecutorX',  total weight = 8 
+892 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Comparator] same object.
+892 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose left side (ExecutorX)
+893 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 1 vs 0 
+893 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected ExecutorX
+893 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '5'
+894 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor8' with 'Executor2',  total weight = 5 
+894 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+894 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose left side (Executor8)
+894 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 1 vs 0 
+894 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor5' with 'Executor8',  total weight = 5 
+895 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+895 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+895 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor10' with 'Executor8',  total weight = 5 
+895 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+895 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+896 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor7' with 'Executor8',  total weight = 5 
+896 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+896 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+896 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor3' with 'Executor8',  total weight = 5 
+896 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+896 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+897 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor6' with 'Executor8',  total weight = 5 
+897 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+897 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+897 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor9' with 'Executor8',  total weight = 5 
+897 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+898 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 0 
+898 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor12' with 'Executor9',  total weight = 5 
+898 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+898 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 0 
+898 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor11' with 'Executor12',  total weight = 5 
+899 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+899 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 0 
+899 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor4' with 'Executor11',  total weight = 5 
+899 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+899 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+900 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor1' with 'Executor11',  total weight = 5 
+900 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+900 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+901 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Priority'. Weight = '6'
+901 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor8' with 'Executor2',  total weight = 11 
+901 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+901 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 6)
+901 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 6 
+902 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor5' with 'Executor2',  total weight = 11 
+902 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+902 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 1 (current score 6 vs 5)
+902 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 6 vs 5 
+903 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor10' with 'Executor5',  total weight = 11 
+903 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+903 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 11)
+904 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 11 
+904 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor7' with 'Executor5',  total weight = 11 
+904 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+904 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 0)
+904 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose left side (Executor7)
+905 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 1 vs 0 
+906 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor3' with 'Executor7',  total weight = 11 
+908 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+909 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 5 vs 6)
+911 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 6 
+912 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor6' with 'Executor7',  total weight = 11 
+912 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+913 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 0)
+914 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose right side (Executor7)
+914 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 1 
+915 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor9' with 'Executor7',  total weight = 11 
+916 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+918 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 5 vs 0)
+921 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 0 
+921 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor12' with 'Executor9',  total weight = 11 
+921 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+922 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 5 vs 0)
+923 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 0 
+924 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor11' with 'Executor12',  total weight = 11 
+925 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+926 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 5 vs 6)
+926 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 6 
+926 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor4' with 'Executor12',  total weight = 11 
+927 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+929 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 11)
+929 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 11 
+930 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor1' with 'Executor12',  total weight = 11 
+930 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+931 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 5)
+931 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+931 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'RemainingTmp'. Weight = '3'
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor8' with 'Executor2',  total weight = 14 
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 6)
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : -1 (current score 0 vs 9)
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 9 
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor5' with 'Executor2',  total weight = 14 
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+932 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 1 (current score 6 vs 5)
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 0 (current score 6 vs 5)
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 6 vs 5 
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor10' with 'Executor5',  total weight = 14 
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 11)
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : -1 (current score 0 vs 14)
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 14 
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor7' with 'Executor5',  total weight = 14 
+933 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 0)
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : -1 (current score 0 vs 3)
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 3 
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor3' with 'Executor5',  total weight = 14 
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 5 vs 6)
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 0 (current score 5 vs 6)
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 6 
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor6' with 'Executor5',  total weight = 14 
+934 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 0)
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : -1 (current score 0 vs 3)
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 3 
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor9' with 'Executor5',  total weight = 14 
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 5 vs 0)
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : -1 (current score 5 vs 3)
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 3 
+935 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor12' with 'Executor9',  total weight = 14 
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 5 vs 0)
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : -1 (current score 5 vs 3)
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 3 
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor11' with 'Executor12',  total weight = 14 
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 1 (current score 5 vs 0)
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 5 vs 6)
+936 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : -1 (current score 5 vs 9)
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 5 vs 9 
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor4' with 'Executor12',  total weight = 14 
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 11)
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 1 (current score 3 vs 11)
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 3 vs 11 
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor1' with 'Executor12',  total weight = 14 
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : -1 (current score 0 vs 5)
+937 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 5)
+938 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 1 (current score 3 vs 5)
+938 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 3 vs 5 
+938 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredProprity'.
+938 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingMemory'.
+938 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingTmpSpace'.
+938 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredTotalMemory'.
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '3'
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Priority'. Weight = '4'
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'RemainingTmp'. Weight = '1'
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 2
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX' with factor filter for 'Mockfilter'
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+939 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+943 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+943 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX2' with factor filter for 'Mockfilter'
+943 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+943 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+943 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+944 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+944 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+944 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 2
+944 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'ExecutorX2' with 'ExecutorX',  total weight = 8 
+944 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 0)
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 0 (current score 0 vs 0)
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose left side (ExecutorX2)
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 1 vs 0 
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected ExecutorX2
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 2
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX2' with factor filter for 'Mockfilter'
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX' with factor filter for 'Mockfilter'
+945 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 2
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'ExecutorX' with 'ExecutorX2',  total weight = 8 
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 0)
+946 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 0 (current score 0 vs 0)
+947 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose right side (ExecutorX2)
+948 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 1 
+948 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected ExecutorX2
+949 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingMemory'.
+949 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor1' with factor filter for 'Mockfilter'
+949 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+949 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+949 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor3' with factor filter for 'Mockfilter'
+949 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+949 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredProprity'.
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor3' with factor filter for 'Mockfilter'
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : false 
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingTmpSpace'.
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor2' with factor filter for 'Mockfilter'
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+950 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+951 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+951 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor8' with factor filter for 'Mockfilter'
+951 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+951 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+951 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+997 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredProprity'.
+998 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingMemory'.
+998 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingTmpSpace'.
+999 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredTotalMemory'.
+999 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '3'
+999 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Priority'. Weight = '4'
+999 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'RemainingTmp'. Weight = '1'
+999 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+999 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 1
+1000 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX' with factor filter for 'Mockfilter'
+1000 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1000 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1000 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+1000 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : false 
+1001 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1001 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 0
+1001 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - failed to select candidate as the filtered candidate list is empty.
+1001 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+1001 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 1
+1001 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'ExecutorX' with factor filter for 'Mockfilter'
+1002 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1002 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1002 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+1002 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+1002 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+1003 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 1
+1003 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected ExecutorX
+1003 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'StaticRemainingFlowSize'.
+1003 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'CpuStatus'.
+1003 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'MinimumFreeMemory'.
+1004 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '3'
+1004 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Priority'. Weight = '4'
+1004 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'RemainingTmp'. Weight = '1'
+1005 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+1005 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 3
+1005 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - skipping the candidate filtering as the filter object is not specifed.
+1005 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 3
+1006 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'ExecutorX2' with 'ExecutorX',  total weight = 8 
+1006 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+1006 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : 0 (current score 0 vs 0)
+1006 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 0 (current score 0 vs 0)
+1006 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose left side (ExecutorX2)
+1006 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 1 vs 0 
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing '(null)' with 'ExecutorX2',  total weight = 8 
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Comparator] left side is null, right side gets total weight.
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 8 
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected ExecutorX2
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 2
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - skipping the candidate filtering as the filter object is not specifed.
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 2
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing '(null)' with '(null)',  total weight = 8 
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Comparator] same object.
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [TieBreaker] TieBreaker chose left side (null)
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 1 vs 0 
+1007 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected (null)
+1011 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '0'
+1011 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredProprity'.
+1011 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingMemory'.
+1011 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredRemainingTmpSpace'.
+1012 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Factor filter added for 'requiredTotalMemory'.
+1012 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Memory'. Weight = '3'
+1012 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'Priority'. Weight = '5'
+1012 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Factor comparator added for 'RemainingTmp'. Weight = '3'
+1012 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+1012 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 12
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor3' with factor filter for 'Mockfilter'
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : false 
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor5' with factor filter for 'Mockfilter'
+1013 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor1' with factor filter for 'Mockfilter'
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor6' with factor filter for 'Mockfilter'
+1014 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor4' with factor filter for 'Mockfilter'
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor8' with factor filter for 'Mockfilter'
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1015 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor10' with factor filter for 'Mockfilter'
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor9' with factor filter for 'Mockfilter'
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor7' with factor filter for 'Mockfilter'
+1016 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor2' with factor filter for 'Mockfilter'
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : true 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredProprity] filter result : true 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : true 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor12' with factor filter for 'Mockfilter'
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : false 
+1017 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1018 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor11' with factor filter for 'Mockfilter'
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 3
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor4' with 'Executor1',  total weight = 11 
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 5)
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 0 (current score 0 vs 5)
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+1019 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start comparing 'Executor2' with 'Executor1',  total weight = 11 
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Memory] compare result : 0 (current score 0 vs 0)
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: Priority] compare result : -1 (current score 0 vs 5)
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - [Factor: RemainingTmp] compare result : 0 (current score 0 vs 5)
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - Result : 0 vs 5 
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate selected Executor1
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - start candidate selection logic.
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count before filtering: 12
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor3' with factor filter for 'Mockfilter'
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor5' with factor filter for 'Mockfilter'
+1020 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1022 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1022 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor1' with factor filter for 'Mockfilter'
+1022 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1022 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1022 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1022 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1023 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor6' with factor filter for 'Mockfilter'
+1023 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1023 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1023 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor4' with factor filter for 'Mockfilter'
+1023 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1023 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1023 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor8' with factor filter for 'Mockfilter'
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor10' with factor filter for 'Mockfilter'
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1024 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor9' with factor filter for 'Mockfilter'
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor7' with factor filter for 'Mockfilter'
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : false 
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor2' with factor filter for 'Mockfilter'
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1025 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor12' with factor filter for 'Mockfilter'
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : false 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - start filtering 'Executor11' with factor filter for 'Mockfilter'
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingMemory] filter result : true 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredTotalMemory] filter result : true 
+1026 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - [Factor: requiredRemainingTmpSpace] filter result : false 
+1027 [Test worker] DEBUG azkaban.executor.selector.CandidateFilter  - Final filtering result : false 
+1027 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - candidate count after filtering: 0
+1027 [Test worker] DEBUG azkaban.executor.selector.CandidateComparator  - failed to select candidate as the filtered candidate list is empty.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

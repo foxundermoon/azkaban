@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.execapp.FlowRunnerPropertyResolutionTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2016-04-13T08:41:35" hostname="zexinBian-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <testcase name="testPropertyResolution" classname="azkaban.execapp.FlowRunnerPropertyResolutionTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

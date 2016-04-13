@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.jobcallback.JobCallbackValidatorTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:40:59" hostname="zexinBian-MacBook-Pro.local" time="0.016">
+  <properties/>
+  <testcase name="noJobCallbackProps" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.001"/>
+  <testcase name="multipleGetJobCallbackWithGap" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.001"/>
+  <testcase name="sequenceStartWithZeroProps" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.002"/>
+  <testcase name="multiplePostJobCallbacks" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.001"/>
+  <testcase name="postBodyLengthTooLargeTest" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.004"/>
+  <testcase name="onePostJobCallback" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.0"/>
+  <testcase name="oneGetJobCallback" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.001"/>
+  <testcase name="multipleGetJobCallbacks" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.001"/>
+  <testcase name="noPostBodyJobCallback" classname="azkaban.jobcallback.JobCallbackValidatorTest" time="0.002"/>
+  <system-out><![CDATA[1031 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job bogusJob
+1032 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 2 job callbacks for job bogusJob
+1035 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 1 job callbacks for job bogusJob
+1036 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 2 job callbacks for job bogusJob
+1037 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job bogusJob
+[POST body length is : 26 which is larger than supported length of 20]
+1041 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 1 job callbacks for job bogusJob
+1043 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 1 job callbacks for job bogusJob
+1044 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 2 job callbacks for job bogusJob
+1045 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job bogusJob
+[No POST body was specified for job callback 'http://www.linkedin.com']
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

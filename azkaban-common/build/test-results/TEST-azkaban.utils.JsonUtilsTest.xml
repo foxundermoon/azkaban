@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.utils.JsonUtilsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:26" hostname="zexinBian-MacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="writePropsNoJarDependencyTest1" classname="azkaban.utils.JsonUtilsTest" time="0.001"/>
+  <testcase name="writePropsNoJarDependencyTest2" classname="azkaban.utils.JsonUtilsTest" time="0.0"/>
+  <system-out><![CDATA[{
+	"\"myTest\n\b":"myValue\t\\",
+	"normalKey":"Other key"
+}
+{
+	"\"myTest\n\b":"myValue\t\\"
+}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

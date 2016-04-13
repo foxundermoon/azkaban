@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.trigger.JdbcTriggerLoaderTest" tests="3" skipped="3" failures="0" errors="0" timestamp="2016-04-13T08:41:24" hostname="zexinBian-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <testcase name="updateTriggerTest" classname="azkaban.trigger.JdbcTriggerLoaderTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="addTriggerTest" classname="azkaban.trigger.JdbcTriggerLoaderTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="removeTriggerTest" classname="azkaban.trigger.JdbcTriggerLoaderTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

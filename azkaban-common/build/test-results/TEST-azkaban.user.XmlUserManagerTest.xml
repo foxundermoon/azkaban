@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.user.XmlUserManagerTest" tests="3" skipped="2" failures="0" errors="0" timestamp="2016-04-13T08:41:26" hostname="zexinBian-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <testcase name="testFilePropNotSet" classname="azkaban.user.XmlUserManagerTest" time="0.0"/>
+  <testcase name="testBasicLoad" classname="azkaban.user.XmlUserManagerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="testDoNotExist" classname="azkaban.user.XmlUserManagerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.database.AzkabanDatabaseSetupTest" tests="2" skipped="2" failures="0" errors="0" timestamp="2016-04-13T08:40:57" hostname="zexinBian-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <testcase name="testH2Query" classname="azkaban.database.AzkabanDatabaseSetupTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="testMySQLQuery" classname="azkaban.database.AzkabanDatabaseSetupTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

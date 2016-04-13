@@ -1,0 +1,4 @@
+See file:///Users/bianzexin/Documents/workspace/bigdata/azkaban/azkaban-common/build/tmp/compileMainExecutableMainC/output.txt for all output for compileMainExecutableMainC.
+compiling execute-as-user.c successful.
+
+Finished compileMainExecutableMainC, see full log file:///Users/bianzexin/Documents/workspace/bigdata/azkaban/azkaban-common/build/tmp/compileMainExecutableMainC/output.txt.

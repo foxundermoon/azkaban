@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.project.ProjectTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:04" hostname="zexinBian-MacBook-Pro.local" time="0.009">
+  <properties/>
+  <testcase name="testToAndFromObject" classname="azkaban.project.ProjectTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

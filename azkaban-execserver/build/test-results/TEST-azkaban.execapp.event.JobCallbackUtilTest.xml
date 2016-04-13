@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.execapp.event.JobCallbackUtilTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:54" hostname="zexinBian-MacBook-Pro.local" time="0.017">
+  <properties/>
+  <testcase name="tokenWithEncoding" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="hasCallbackPropertiesWithGapTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="multipleHeaderElementTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="parseJobCallbackWithGapTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="noHeaderElementTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="noCallbackPropertiesTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="twoTokensTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="hasCallbackPropertiesTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="partialHeaderElementTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.001"/>
+  <testcase name="parseJobCallbackOneGetTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.001"/>
+  <testcase name="allTokensTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="parseJobCallbackWithPostTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.001"/>
+  <testcase name="parseJobCallbackWithInvalidURLTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.001"/>
+  <testcase name="oneTokenTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.001"/>
+  <testcase name="parseJobCallbackTwoGetsTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.001"/>
+  <testcase name="multipleStatusWithNoJobCallbackTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="multipleStatusesWithJobCallbackTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="oneHeaderElementTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <testcase name="noTokenTest" classname="azkaban.execapp.event.JobCallbackUtilTest" time="0.0"/>
+  <system-out><![CDATA[{job.notification.completed.2.url: def, job.notification.started.2.url: def, job.notification.success.2.url: def, job.notification.failure.2.url: def, }
+headers: Content-type:application/json
+Accept:application/xml
+User-Agent:Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0
+{job.notification.completed.1.url: def, job.notification.success.1.url: def, job.notification.started.1.url: def, job.notification.failure.1.url: def, }
+headers: Content-type:application/json
+Accept:
+User-Agent:Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.trigger.TriggerManagerDeadlockTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:24" hostname="zexinBian-MacBook-Pro.local" time="2.18">
+  <properties/>
+  <testcase name="deadlockTest" classname="azkaban.trigger.TriggerManagerDeadlockTest" time="2.18"/>
+  <system-out><![CDATA[26584 [Test worker] INFO azkaban.executor.ExecutorManager  - Initializing local executor localhost:12321
+26585 [AzkabanWebServer-Cleaner-Thread] INFO azkaban.executor.ExecutorManager  - Cleaning old logs from execution_logs
+26585 [AzkabanWebServer-Cleaner-Thread] INFO azkaban.executor.ExecutorManager  - Cleaning old log files before 2016-01-20T16:41:24.576+08:00
+26585 [AzkabanWebServer-Cleaner-Thread] INFO azkaban.executor.ExecutorManager  - Cleaned up 0 log entries.
+26591 [Test worker] INFO azkaban.trigger.TriggerManager  - TriggerManager loaded.
+No dead lock.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

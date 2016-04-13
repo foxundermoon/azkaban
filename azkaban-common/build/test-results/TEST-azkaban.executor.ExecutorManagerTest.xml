@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.executor.ExecutorManagerTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:40:58" hostname="zexinBian-MacBook-Pro.local" time="0.043">
+  <properties/>
+  <testcase name="testDisablingQueueProcessThread" classname="azkaban.executor.ExecutorManagerTest" time="0.013"/>
+  <testcase name="testQueuedFlows" classname="azkaban.executor.ExecutorManagerTest" time="0.008"/>
+  <testcase name="testLocalExecutorScenario" classname="azkaban.executor.ExecutorManagerTest" time="0.003"/>
+  <testcase name="testEnablingQueueProcessThread" classname="azkaban.executor.ExecutorManagerTest" time="0.001"/>
+  <testcase name="testKillQueuedFlow" classname="azkaban.executor.ExecutorManagerTest" time="0.007"/>
+  <testcase name="testSetupExecutorsException" classname="azkaban.executor.ExecutorManagerTest" time="0.001"/>
+  <testcase name="testNoExecutorScenario" classname="azkaban.executor.ExecutorManagerTest" time="0.0"/>
+  <testcase name="testSetupExecutorsSucess" classname="azkaban.executor.ExecutorManagerTest" time="0.001"/>
+  <testcase name="testDuplicateQueuedFlows" classname="azkaban.executor.ExecutorManagerTest" time="0.002"/>
+  <testcase name="testMultipleExecutorScenario" classname="azkaban.executor.ExecutorManagerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

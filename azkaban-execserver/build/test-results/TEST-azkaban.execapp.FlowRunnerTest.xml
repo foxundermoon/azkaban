@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.execapp.FlowRunnerTest" tests="7" skipped="7" failures="0" errors="0" timestamp="2016-04-13T08:41:35" hostname="zexinBian-MacBook-Pro.local" time="0.003">
+  <properties/>
+  <testcase name="exec1Failed" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="execRetries" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="exec1Normal" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="exec1FailedKillAll" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="exec1FailedFinishRest" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="execAndCancel" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="exec1Disabled" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

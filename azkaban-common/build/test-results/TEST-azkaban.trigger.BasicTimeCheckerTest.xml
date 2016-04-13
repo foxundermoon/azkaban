@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="azkaban.trigger.BasicTimeCheckerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:04" hostname="zexinBian-MacBook-Pro.local" time="20.056">
+  <properties/>
+  <testcase name="basicTimerTest" classname="azkaban.trigger.BasicTimeCheckerTest" time="20.056"/>
+  <system-out><![CDATA[BasicTimeChecket_1.eval()
+6534 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition BasicTimeChecket_1.eval()
+16550 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition BasicTimeChecket_1.eval()
+16564 [Test worker] INFO azkaban.trigger.Condition  - Done resetting checkers. The next check time will be 2016-04-13T16:41:24.505+08:00
+16564 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition BasicTimeChecket_1.eval()
+26569 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition BasicTimeChecket_1.eval()
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
