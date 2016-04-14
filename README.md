@@ -1,3 +1,6 @@
+自己测试Azkaban3.0.0和hdfs viewer插件的时候发现版本不匹配导致无法使用hdfs viewer插件，因此重新将hdfs viewer的功能整合到Azkaban web server中。
+
+
 Azkaban 3 [![Build Status](http://img.shields.io/travis/azkaban/azkaban.svg?style=flat)](https://travis-ci.org/azkaban/azkaban)
 ========
 
