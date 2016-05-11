@@ -16,20 +16,22 @@
 
 package azkaban.jobExecutor;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.Logger;
-
 import azkaban.flow.CommonJobProperties;
+import azkaban.jobExecutor.utils.HadoopJobUtils;
+import azkaban.jobExecutor.utils.HadoopSecureWrapperUtils;
 import azkaban.jobExecutor.utils.process.AzkabanProcess;
 import azkaban.jobExecutor.utils.process.AzkabanProcessBuilder;
 import azkaban.utils.Pair;
 import azkaban.utils.Props;
 import azkaban.utils.SystemMemoryInfo;
+import org.apache.hadoop.security.UserGroupInformation;
+import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.security.PrivilegedExceptionAction;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * A job that runs a simple unix command
@@ -275,7 +277,45 @@ public class ProcessJob extends AbstractProcessJob {
       warn("Kill with signal TERM failed. Killing with KILL signal.");
       process.hardKill();
     }
+
+    /**
+     * process to kill hadoop job on the yarn cluster
+     */
+    String azExecId = jobProps.getString(CommonJobProperties.EXEC_ID);
+    final String logFilePath = String.format("%s/_job.%s.%s.log", getWorkingDirectory(), azExecId, getId());
+    Set<String> applicationIds = HadoopJobUtils.findApplicationIdFromLog(logFilePath, getLog());
+    if ( applicationIds != null && applicationIds.size() > 0) {
+      Props props = new Props();
+      props.putAll(getJobProps());
+      props.putAll(getSysProps());
+      Properties properties = new Properties();
+      properties.putAll(jobProps.getFlattened());
+      try {
+        if (HadoopSecureWrapperUtils.shouldProxy(properties)) {
+          File file = HadoopSecureWrapperUtils.getHadoopTokens(HadoopJobUtils.loadHadoopSecurityManager(getSysProps(), getLog()),props, getLog());
+          if (file != null) {
+            UserGroupInformation proxyUser = HadoopSecureWrapperUtils.setupProxyUser(properties, file.getAbsolutePath(), getLog());
+            proxyUser.doAs(new PrivilegedExceptionAction<Void>() {
+              @Override
+              public Void run() throws Exception {
+                HadoopJobUtils.killAllSpawnedHadoopJobs(logFilePath, getLog());
+                return null;
+              }
+            });
+          }
+        } else {
+          HadoopJobUtils.killAllSpawnedHadoopJobs(logFilePath, getLog());
+        }
+      } catch (Throwable t) {
+        Logger.getRootLogger().warn("something happened while trying to kill all spawned jobs", t);
+      }
+    }
+    /**
+     * finish to process kill job on the yarn cluster.
+     */
   }
+
+
 
   @Override
   public double getProgress() {
