@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.database.AzkabanDatabaseUpdaterTest" tests="2" skipped="1" failures="0" errors="0" timestamp="2016-04-13T08:40:57" hostname="zexinBian-MacBook-Pro.local" time="0.051">
+<testsuite name="azkaban.database.AzkabanDatabaseUpdaterTest" tests="2" skipped="1" failures="0" errors="0" timestamp="2016-05-10T04:22:20" hostname="zexinBian-MacBook-Pro.local" time="0.048">
   <properties/>
-  <testcase name="testH2AutoCreate" classname="azkaban.database.AzkabanDatabaseUpdaterTest" time="0.05"/>
+  <testcase name="testH2AutoCreate" classname="azkaban.database.AzkabanDatabaseUpdaterTest" time="0.048"/>
   <testcase name="testMySQLAutoCreate" classname="azkaban.database.AzkabanDatabaseUpdaterTest" time="0.0">
     <skipped/>
   </testcase>

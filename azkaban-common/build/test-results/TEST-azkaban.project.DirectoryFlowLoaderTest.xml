@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.project.DirectoryFlowLoaderTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:04" hostname="zexinBian-MacBook-Pro.local" time="0.021">
+<testsuite name="azkaban.project.DirectoryFlowLoaderTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-05-10T04:22:26" hostname="zexinBian-MacBook-Pro.local" time="0.038">
   <properties/>
-  <testcase name="testDirectoryLoad" classname="azkaban.project.DirectoryFlowLoaderTest" time="0.008"/>
-  <testcase name="testRecursiveLoadEmbeddedFlow" classname="azkaban.project.DirectoryFlowLoaderTest" time="0.005"/>
+  <testcase name="testDirectoryLoad" classname="azkaban.project.DirectoryFlowLoaderTest" time="0.022"/>
+  <testcase name="testRecursiveLoadEmbeddedFlow" classname="azkaban.project.DirectoryFlowLoaderTest" time="0.009"/>
   <testcase name="testLoadEmbeddedFlow" classname="azkaban.project.DirectoryFlowLoaderTest" time="0.007"/>
-  <system-out><![CDATA[6386 [Test worker] INFO azkaban.project.DirectoryFlowLoaderTest  - Adding prop1.properties
-6386 [Test worker] INFO azkaban.project.DirectoryFlowLoaderTest  - Adding prop2.properties
-6388 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job1
-6389 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job2
-6389 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job-retry-fail
-6389 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job3
-6389 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job4
-6390 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job5
-6390 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job6
-6390 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job7
-6391 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job8
-6391 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job9
-6391 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job10
-6392 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job-pass
-6392 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job-retry
-6392 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job2d
-6393 [Test worker] INFO azkaban.project.DirectoryFlowLoaderTest  - 5
-6395 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobb
-6396 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerFlow
-6396 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job selfreference
-6396 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job joba
-6397 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobd
-6397 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobc
-6397 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobB
-6398 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobA
-6398 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobe
-6398 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobC
+  <system-out><![CDATA[6243 [Test worker] INFO azkaban.project.DirectoryFlowLoaderTest  - Adding prop1.properties
+6244 [Test worker] INFO azkaban.project.DirectoryFlowLoaderTest  - Adding prop2.properties
+6260 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job1
+6260 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job2
+6260 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job-retry-fail
+6260 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job3
+6261 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job4
+6261 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job5
+6261 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job6
+6261 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job7
+6262 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job8
+6262 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job9
+6262 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job10
+6262 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job-pass
+6263 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job-retry
+6263 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job job2d
+6263 [Test worker] INFO azkaban.project.DirectoryFlowLoaderTest  - 5
+6269 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobb
+6269 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerFlow
+6269 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job selfreference
+6270 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job joba
+6270 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobd
+6271 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobc
+6271 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobB
+6271 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobA
+6272 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobe
+6272 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobC
 Embedded flow cycle found in jobe->innerFlow
 Embedded flow cycle found in selfreference->selfreference
 Embedded flow cycle found in innerFlow->jobe
-6401 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobb
-6402 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerFlow
-6403 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job joba
-6403 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobd
-6404 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobc
-6404 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobB
-6405 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobA
-6405 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobe
-6405 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobC
+6276 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobb
+6276 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerFlow
+6277 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job joba
+6277 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobd
+6277 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobc
+6278 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobB
+6278 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobA
+6279 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job jobe
+6279 [Test worker] DEBUG azkaban.jobcallback.JobCallbackValidator  - Found 0 job callbacks for job innerJobC
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

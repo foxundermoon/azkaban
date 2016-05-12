@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.execapp.FlowRunnerTest" tests="7" skipped="7" failures="0" errors="0" timestamp="2016-04-13T08:41:35" hostname="zexinBian-MacBook-Pro.local" time="0.003">
+<testsuite name="azkaban.execapp.FlowRunnerTest" tests="7" skipped="7" failures="0" errors="0" timestamp="2016-05-10T04:22:58" hostname="zexinBian-MacBook-Pro.local" time="0.003">
   <properties/>
-  <testcase name="exec1Failed" classname="azkaban.execapp.FlowRunnerTest" time="0.0">
+  <testcase name="exec1Failed" classname="azkaban.execapp.FlowRunnerTest" time="0.001">
     <skipped/>
   </testcase>
   <testcase name="execRetries" classname="azkaban.execapp.FlowRunnerTest" time="0.0">

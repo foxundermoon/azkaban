@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.utils.PropsUtilsTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:26" hostname="zexinBian-MacBook-Pro.local" time="0.045">
+<testsuite name="azkaban.utils.PropsUtilsTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-05-10T04:22:49" hostname="zexinBian-MacBook-Pro.local" time="0.056">
   <properties/>
   <testcase name="testGoodResolveProps" classname="azkaban.utils.PropsUtilsTest" time="0.001"/>
   <testcase name="testGetFlattenedProps" classname="azkaban.utils.PropsUtilsTest" time="0.0"/>
-  <testcase name="testMalformedExpressionProps" classname="azkaban.utils.PropsUtilsTest" time="0.022"/>
-  <testcase name="testInvalidSyntax" classname="azkaban.utils.PropsUtilsTest" time="0.002"/>
-  <testcase name="testCyclesResolveProps" classname="azkaban.utils.PropsUtilsTest" time="0.009"/>
-  <testcase name="testExpressionResolution" classname="azkaban.utils.PropsUtilsTest" time="0.01"/>
-  <system-out><![CDATA[28864 [Test worker] WARN org.apache.commons.jexl2.JexlEngine  - azkaban.utils.PropsUtils.resolveVariableExpression@265![0,2]: 'my;' undefined variable my
-28884 [Test worker] WARN org.apache.commons.jexl2.JexlEngine  - azkaban.utils.PropsUtils.resolveVariableExpression@265![4,10]: '1 + normal;' undefined variable normal
+  <testcase name="testMalformedExpressionProps" classname="azkaban.utils.PropsUtilsTest" time="0.031"/>
+  <testcase name="testInvalidSyntax" classname="azkaban.utils.PropsUtilsTest" time="0.001"/>
+  <testcase name="testCyclesResolveProps" classname="azkaban.utils.PropsUtilsTest" time="0.017"/>
+  <testcase name="testExpressionResolution" classname="azkaban.utils.PropsUtilsTest" time="0.003"/>
+  <system-out><![CDATA[28574 [Test worker] WARN org.apache.commons.jexl2.JexlEngine  - azkaban.utils.PropsUtils.resolveVariableExpression@265![0,2]: 'my;' undefined variable my
+28595 [Test worker] WARN org.apache.commons.jexl2.JexlEngine  - azkaban.utils.PropsUtils.resolveVariableExpression@265![4,10]: '1 + normal;' undefined variable normal
 ]]></system-out>
   <system-err><![CDATA[java.lang.IllegalArgumentException: Expression $(1+2 not well formed.
 	at azkaban.utils.PropsUtils.resolveVariableExpression(PropsUtils.java:258)

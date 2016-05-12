@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.124s</div>
+<div class="counter">0.159s</div>
 <p>duration</p>
 </div>
 </td>
@@ -92,22 +92,22 @@
 </tr>
 <tr>
 <td class="success">testMultipleUnixCommands</td>
-<td>0.023s</td>
+<td>0.021s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testMultipleUnixCommands</td>
-<td>0.028s</td>
+<td>0.053s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testOneUnixCommand</td>
+<td>0.025s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testOneUnixCommand</td>
 <td>0.012s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testOneUnixCommand</td>
-<td>0.013s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -145,120 +145,120 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2677 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-2680 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-2682 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-2682 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
-2682 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4620941430881369501/TestProcess/TestProcess_props_7463132269366060499_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4620941430881369501/TestProcess/TestProcess_output_3607976182412317742_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-2682 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4620941430881369501/TestProcess
-2687 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73686
-2690 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - total 8
-2690 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  4 13 16:41 .
-2690 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  4 13 16:41 ..
-2690 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  4 13 16:41 TestProcess_output_3607976182412317742_tmp
-2690 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  328  4 13 16:41 TestProcess_props_7463132269366060499_tmp
-2690 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-2692 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-2694 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-2694 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: xls -al
-2694 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6984515061947806188/TestProcess/TestProcess_props_8340894359106528818_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6984515061947806188/TestProcess/TestProcess_output_3194432289083475386_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-2694 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6984515061947806188/TestProcess
-2698 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed unsuccessfully in 0 seconds.
-2703 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 3 commands to execute.
-2704 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-2705 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: pwd
-2705 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess/TestProcess_props_8400051224954007603_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess/TestProcess_output_5130830594643004682_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-2705 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess
-2708 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73688
-2709 [Thread-39] INFO azkaban.jobExecutor.ProcessJob  - /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess
-2709 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-2709 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: date
-2709 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess/TestProcess_props_8400051224954007603_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess/TestProcess_output_5130830594643004682_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-2709 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess
-2713 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73689
-2715 [Thread-41] INFO azkaban.jobExecutor.ProcessJob  - 2016年 4月13日 星期三 16时41分00秒 CST
-2715 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-2715 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: whoami
-2715 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess/TestProcess_props_8400051224954007603_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess/TestProcess_output_5130830594643004682_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-2715 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess
-2719 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73690
-2723 [Thread-43] INFO azkaban.jobExecutor.ProcessJob  - bianzexin
-2723 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-2726 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-2728 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-2728 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
-2728 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit7070258809997009048/TestProcess/TestProcess_props_2246371712453099526_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit7070258809997009048/TestProcess/TestProcess_output_1046560027701515554_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-2728 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit7070258809997009048/TestProcess
-2731 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73691
-2734 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - total 8
-2734 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  4 13 16:41 .
-2734 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  4 13 16:41 ..
-2734 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  4 13 16:41 TestProcess_output_1046560027701515554_tmp
-2734 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  318  4 13 16:41 TestProcess_props_2246371712453099526_tmp
-2734 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-4192 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-4196 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-4198 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-4198 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
-4198 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4738318669880922651/TestProcess/TestProcess_props_219296119501373445_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4738318669880922651/TestProcess/TestProcess_output_8940302126666362337_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-4198 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4738318669880922651/TestProcess
-4201 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73700
-4204 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - total 8
-4205 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  4 13 16:41 .
-4205 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  4 13 16:41 ..
-4205 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  4 13 16:41 TestProcess_output_8940302126666362337_tmp
-4205 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  328  4 13 16:41 TestProcess_props_219296119501373445_tmp
-4206 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-4208 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-4210 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-4210 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: xls -al
-4210 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit3127463673099758006/TestProcess/TestProcess_props_1343738116531053140_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit3127463673099758006/TestProcess/TestProcess_output_4624290715025653585_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-4210 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit3127463673099758006/TestProcess
-4214 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed unsuccessfully in 0 seconds.
-4218 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 3 commands to execute.
-4221 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-4221 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: pwd
-4221 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess/TestProcess_props_5913795705443304351_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess/TestProcess_output_7406198062042795267_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-4221 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess
-4225 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73702
-4226 [Thread-55] INFO azkaban.jobExecutor.ProcessJob  - /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess
-4227 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-4227 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: date
-4227 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess/TestProcess_props_5913795705443304351_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess/TestProcess_output_7406198062042795267_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-4227 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess
-4232 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73703
-4234 [Thread-57] INFO azkaban.jobExecutor.ProcessJob  - 2016年 4月13日 星期三 16时41分02秒 CST
-4234 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-4235 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: whoami
-4235 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess/TestProcess_props_5913795705443304351_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess/TestProcess_output_7406198062042795267_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-4235 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess
-4238 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73704
-4243 [Thread-59] INFO azkaban.jobExecutor.ProcessJob  - bianzexin
-4244 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
-4246 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
-4248 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
-4248 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
-4248 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit241839453358698299/TestProcess/TestProcess_props_129609845572769094_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit241839453358698299/TestProcess/TestProcess_output_5535509534345259767_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
-4248 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit241839453358698299/TestProcess
-4250 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 73705
-4253 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - total 8
-4254 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  4 13 16:41 .
-4254 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  4 13 16:41 ..
-4254 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  4 13 16:41 TestProcess_output_5535509534345259767_tmp
-4254 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  317  4 13 16:41 TestProcess_props_129609845572769094_tmp
-4254 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+<pre>2526 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+2529 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+2531 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+2531 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
+2531 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit2215228780094728521/TestProcess/TestProcess_props_2444974996294613184_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit2215228780094728521/TestProcess/TestProcess_output_8559047811079551583_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+2531 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit2215228780094728521/TestProcess
+2548 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8565
+2552 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - total 8
+2552 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  5 10 12:22 .
+2552 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  5 10 12:22 ..
+2552 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  5 10 12:22 TestProcess_output_8559047811079551583_tmp
+2552 [Thread-37] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  328  5 10 12:22 TestProcess_props_2444974996294613184_tmp
+2552 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+2554 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+2556 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+2556 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: xls -al
+2556 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6394154843555013925/TestProcess/TestProcess_props_1591498591505082766_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6394154843555013925/TestProcess/TestProcess_output_3813269684828300419_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+2556 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6394154843555013925/TestProcess
+2559 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed unsuccessfully in 0 seconds.
+2565 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 3 commands to execute.
+2566 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+2566 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: pwd
+2566 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess/TestProcess_props_2625108943332978092_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess/TestProcess_output_6444485134326278512_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+2566 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess
+2581 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8567
+2582 [Thread-39] INFO azkaban.jobExecutor.ProcessJob  - /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess
+2583 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+2583 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: date
+2583 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess/TestProcess_props_2625108943332978092_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess/TestProcess_output_6444485134326278512_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+2583 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess
+2593 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8568
+2595 [Thread-41] INFO azkaban.jobExecutor.ProcessJob  - 2016年 5月10日 星期二 12时22分23秒 CST
+2595 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+2595 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: whoami
+2596 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess/TestProcess_props_2625108943332978092_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess/TestProcess_output_6444485134326278512_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+2596 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess
+2611 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8569
+2615 [Thread-43] INFO azkaban.jobExecutor.ProcessJob  - bianzexin
+2615 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+2617 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+2618 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+2619 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
+2619 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8664867162514187536/TestProcess/TestProcess_props_1249954370222233586_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8664867162514187536/TestProcess/TestProcess_output_2542826262632925743_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+2619 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8664867162514187536/TestProcess
+2622 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8570
+2625 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - total 8
+2625 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  5 10 12:22 .
+2625 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  5 10 12:22 ..
+2625 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  5 10 12:22 TestProcess_output_2542826262632925743_tmp
+2625 [Thread-45] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  318  5 10 12:22 TestProcess_props_1249954370222233586_tmp
+2625 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+4055 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+4059 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+4061 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+4061 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
+4061 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4563309450144561389/TestProcess/TestProcess_props_643324535390722309_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4563309450144561389/TestProcess/TestProcess_output_3342504524296787764_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+4062 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4563309450144561389/TestProcess
+4065 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8574
+4068 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - total 8
+4068 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  5 10 12:22 .
+4068 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  5 10 12:22 ..
+4069 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  5 10 12:22 TestProcess_output_3342504524296787764_tmp
+4069 [Thread-53] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  328  5 10 12:22 TestProcess_props_643324535390722309_tmp
+4069 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+4071 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+4073 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+4073 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: xls -al
+4073 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1411830396680367426/TestProcess/TestProcess_props_2313110556113050256_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1411830396680367426/TestProcess/TestProcess_output_3244477192391610858_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+4074 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1411830396680367426/TestProcess
+4076 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed unsuccessfully in 0 seconds.
+4081 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 3 commands to execute.
+4083 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+4083 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: pwd
+4083 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess/TestProcess_props_2508133431925149046_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess/TestProcess_output_2830033470094800925_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+4083 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess
+4086 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8576
+4087 [Thread-55] INFO azkaban.jobExecutor.ProcessJob  - /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess
+4087 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+4088 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: date
+4088 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess/TestProcess_props_2508133431925149046_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess/TestProcess_output_2830033470094800925_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+4088 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess
+4092 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8577
+4094 [Thread-57] INFO azkaban.jobExecutor.ProcessJob  - 2016年 5月10日 星期二 12时22分24秒 CST
+4094 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+4094 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: whoami
+4094 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess/TestProcess_props_2508133431925149046_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess/TestProcess_output_2830033470094800925_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+4095 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess
+4097 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8578
+4100 [Thread-59] INFO azkaban.jobExecutor.ProcessJob  - bianzexin
+4100 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
+4102 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - 1 commands to execute.
+4103 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - effective user is: test_user
+4104 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Command: ls -al
+4104 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Environment variables: {JOB_NAME=TestProcess, JOB_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4190945739094196702/TestProcess/TestProcess_props_5432034546763512438_tmp, JOB_OUTPUT_PROP_FILE=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4190945739094196702/TestProcess/TestProcess_output_6886115279527413278_tmp, KRB5CCNAME=/tmp/krb5cc__test_project__test_flow__TestProcess__123__test_user}
+4104 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Working directory: /private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4190945739094196702/TestProcess
+4106 [Test worker] DEBUG azkaban.jobExecutor.ProcessJob  - Spawned thread with process id 8579
+4109 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - total 8
+4110 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  4 bianzexin  staff  136  5 10 12:22 .
+4110 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - drwxr-xr-x  3 bianzexin  staff  102  5 10 12:22 ..
+4110 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff    0  5 10 12:22 TestProcess_output_6886115279527413278_tmp
+4110 [Thread-61] INFO azkaban.jobExecutor.ProcessJob  - -rw-r--r--  1 bianzexin  staff  318  5 10 12:22 TestProcess_props_5432034546763512438_tmp
+4110 [Test worker] INFO azkaban.jobExecutor.ProcessJob  - Process completed successfully in 0 seconds.
 </pre>
 </span>
 </div>
 <div id="tab2" class="tab">
 <h2>Standard error</h2>
 <span class="code">
-<pre>cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4409549915942810619/TestProcess
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4620941430881369501/TestProcess
-output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4620941430881369501/TestProcess/TestProcess_output_3607976182412317742_tmp
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6984515061947806188/TestProcess
-java.lang.RuntimeException: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6984515061947806188/TestProcess&quot;): error=2, No such file or directory
-	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:165)
+<pre>cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit3058306778427116522/TestProcess
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit2215228780094728521/TestProcess
+output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit2215228780094728521/TestProcess/TestProcess_output_8559047811079551583_tmp
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6394154843555013925/TestProcess
+java.lang.RuntimeException: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6394154843555013925/TestProcess&quot;): error=2, No such file or directory
+	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:167)
 	at azkaban.jobExecutor.ProcessJobTest.testFailedUnixCommand(ProcessJobTest.java:109)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
@@ -315,10 +315,10 @@ java.lang.RuntimeException: java.io.IOException: Cannot run program &quot;xls&qu
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
 	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6984515061947806188/TestProcess&quot;): error=2, No such file or directory
+Caused by: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6394154843555013925/TestProcess&quot;): error=2, No such file or directory
 	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1047)
 	at azkaban.jobExecutor.utils.process.AzkabanProcess.run(AzkabanProcess.java:92)
-	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:159)
+	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:161)
 	... 56 more
 Caused by: java.io.IOException: error=2, No such file or directory
 	at java.lang.UNIXProcess.forkAndExec(Native Method)
@@ -326,16 +326,16 @@ Caused by: java.io.IOException: error=2, No such file or directory
 	at java.lang.ProcessImpl.start(ProcessImpl.java:130)
 	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1028)
 	... 58 more
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess
-output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1002825058651406305/TestProcess/TestProcess_output_5130830594643004682_tmp
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit7070258809997009048/TestProcess
-output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit7070258809997009048/TestProcess/TestProcess_output_1046560027701515554_tmp
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit5530138436478053761/TestProcess
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4738318669880922651/TestProcess
-output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4738318669880922651/TestProcess/TestProcess_output_8940302126666362337_tmp
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit3127463673099758006/TestProcess
-java.lang.RuntimeException: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit3127463673099758006/TestProcess&quot;): error=2, No such file or directory
-	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:165)
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess
+output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit6767323216890211713/TestProcess/TestProcess_output_6444485134326278512_tmp
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8664867162514187536/TestProcess
+output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8664867162514187536/TestProcess/TestProcess_output_2542826262632925743_tmp
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4679513801362223310/TestProcess
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4563309450144561389/TestProcess
+output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4563309450144561389/TestProcess/TestProcess_output_3342504524296787764_tmp
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1411830396680367426/TestProcess
+java.lang.RuntimeException: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1411830396680367426/TestProcess&quot;): error=2, No such file or directory
+	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:167)
 	at azkaban.jobExecutor.ProcessJobTest.testFailedUnixCommand(ProcessJobTest.java:109)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
@@ -384,10 +384,10 @@ java.lang.RuntimeException: java.io.IOException: Cannot run program &quot;xls&qu
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
 	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit3127463673099758006/TestProcess&quot;): error=2, No such file or directory
+Caused by: java.io.IOException: Cannot run program &quot;xls&quot; (in directory &quot;/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit1411830396680367426/TestProcess&quot;): error=2, No such file or directory
 	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1047)
 	at azkaban.jobExecutor.utils.process.AzkabanProcess.run(AzkabanProcess.java:92)
-	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:159)
+	at azkaban.jobExecutor.ProcessJob.run(ProcessJob.java:161)
 	... 48 more
 Caused by: java.io.IOException: error=2, No such file or directory
 	at java.lang.UNIXProcess.forkAndExec(Native Method)
@@ -395,10 +395,10 @@ Caused by: java.io.IOException: error=2, No such file or directory
 	at java.lang.ProcessImpl.start(ProcessImpl.java:130)
 	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1028)
 	... 50 more
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess
-output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit956822948495233778/TestProcess/TestProcess_output_7406198062042795267_tmp
-cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit241839453358698299/TestProcess
-output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit241839453358698299/TestProcess/TestProcess_output_5535509534345259767_tmp
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess
+output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit8909058181484528171/TestProcess/TestProcess_output_2830033470094800925_tmp
+cwd=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4190945739094196702/TestProcess
+output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/junit4190945739094196702/TestProcess/TestProcess_output_6886115279527413278_tmp
 </pre>
 </span>
 </div>
@@ -410,7 +410,7 @@ output properties file=/private/var/folders/q5/6pyccsqn0492yl_9n58zkjfw0000gp/T/
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 2.7</a> at 2016-4-13 16:41:27</p>
+<a href="http://www.gradle.org">Gradle 2.7</a> at 2016-5-10 12:22:50</p>
 </div>
 </div>
 </body>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.execapp.event.BlockingStatusTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:38" hostname="zexinBian-MacBook-Pro.local" time="11.024">
+<testsuite name="azkaban.execapp.event.BlockingStatusTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-05-10T04:23:00" hostname="zexinBian-MacBook-Pro.local" time="11.045">
   <properties/>
-  <testcase name="testUnfinishedBlockSeveralChanges" classname="azkaban.execapp.event.BlockingStatusTest" time="4.007"/>
-  <testcase name="testUnfinishedBlock" classname="azkaban.execapp.event.BlockingStatusTest" time="3.006"/>
+  <testcase name="testUnfinishedBlockSeveralChanges" classname="azkaban.execapp.event.BlockingStatusTest" time="4.013"/>
+  <testcase name="testUnfinishedBlock" classname="azkaban.execapp.event.BlockingStatusTest" time="3.011"/>
   <testcase name="testFinishedBlock" classname="azkaban.execapp.event.BlockingStatusTest" time="0.001"/>
-  <testcase name="testMultipleWatchers" classname="azkaban.execapp.event.BlockingStatusTest" time="4.009"/>
-  <system-out><![CDATA[Diff 4006
-Diff 3006
+  <testcase name="testMultipleWatchers" classname="azkaban.execapp.event.BlockingStatusTest" time="4.019"/>
+  <system-out><![CDATA[Diff 4013
+Diff 3010
 Diff 0
-Diff thread 1 4007
-Diff thread 2 2002
+Diff thread 1 4019
+Diff thread 2 2008
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

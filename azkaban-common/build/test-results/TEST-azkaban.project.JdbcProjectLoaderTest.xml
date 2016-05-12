@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.project.JdbcProjectLoaderTest" tests="12" skipped="3" failures="0" errors="0" timestamp="2016-04-13T08:41:04" hostname="zexinBian-MacBook-Pro.local" time="0.003">
+<testsuite name="azkaban.project.JdbcProjectLoaderTest" tests="12" skipped="3" failures="0" errors="0" timestamp="2016-05-10T04:22:26" hostname="zexinBian-MacBook-Pro.local" time="0.005">
   <properties/>
   <testcase name="testInvalidProjectByFetchProjectByName" classname="azkaban.project.JdbcProjectLoaderTest" time="0.0"/>
   <testcase name="testRemoveProject" classname="azkaban.project.JdbcProjectLoaderTest" time="0.0"/>
@@ -12,7 +12,7 @@
   <testcase name="testFlowUpload" classname="azkaban.project.JdbcProjectLoaderTest" time="0.0">
     <skipped/>
   </testcase>
-  <testcase name="testProjectFilesUpload" classname="azkaban.project.JdbcProjectLoaderTest" time="0.001"/>
+  <testcase name="testProjectFilesUpload" classname="azkaban.project.JdbcProjectLoaderTest" time="0.0"/>
   <testcase name="testAddRemovePermissions" classname="azkaban.project.JdbcProjectLoaderTest" time="0.0"/>
   <testcase name="testProjectRetrievalByFetchProjectByName" classname="azkaban.project.JdbcProjectLoaderTest" time="0.0"/>
   <testcase name="testPermissionRetrivalByFetchProjectByName" classname="azkaban.project.JdbcProjectLoaderTest" time="0.0"/>

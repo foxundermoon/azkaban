@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.metric.MetricManagerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:41:02" hostname="zexinBian-MacBook-Pro.local" time="2.008">
+<testsuite name="azkaban.metric.MetricManagerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-05-10T04:22:24" hostname="zexinBian-MacBook-Pro.local" time="2.012">
   <properties/>
-  <testcase name="managerEmitterHandlingTest" classname="azkaban.metric.MetricManagerTest" time="2.006"/>
-  <testcase name="managerStatusTest" classname="azkaban.metric.MetricManagerTest" time="0.001"/>
-  <testcase name="managerMetricMaintenanceTest" classname="azkaban.metric.MetricManagerTest" time="0.001"/>
-  <testcase name="managerEmitterMaintenanceTest" classname="azkaban.metric.MetricManagerTest" time="0.0"/>
-  <system-out><![CDATA[4376 [Test worker] INFO azkaban.metric.MetricReportManager  - Instantiating MetricReportManager
-4376 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Instantiating Metric Manager
-4376 [Test worker] INFO azkaban.metric.MetricReportManager  - Enabling Metric Manager
-4377 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Adding FakeMetric metric in Metric Manager
-4377 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Notifying Manager for azkaban.metric.FakeMetric
-4377 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Submitting FakeMetric metric for metric emission pool
-4379 [pool-9-thread-1] INFO azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - First time capturing metric: FakeMetric
-4379 [pool-9-thread-1] DEBUG azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - Ingesting metric: FakeMetric
-6379 [Test worker] DEBUG azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - selecting snapshots within time frame
-6380 [Test worker] DEBUG azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - selecting snapshots evenly from across the time interval
-6381 [Test worker] ERROR azkaban.metric.MetricReportManager  - Failed to add metric
-6381 [Test worker] INFO azkaban.metric.MetricReportManager  - Disabling Metric Manager
-6381 [Test worker] INFO azkaban.metric.MetricReportManager  - Enabling Metric Manager
-6381 [Test worker] ERROR azkaban.metric.MetricReportManager  - Failed to add metric
-6382 [Test worker] ERROR azkaban.metric.MetricReportManager  - Failed to add metric
+  <testcase name="managerEmitterHandlingTest" classname="azkaban.metric.MetricManagerTest" time="2.009"/>
+  <testcase name="managerStatusTest" classname="azkaban.metric.MetricManagerTest" time="0.0"/>
+  <testcase name="managerMetricMaintenanceTest" classname="azkaban.metric.MetricManagerTest" time="0.0"/>
+  <testcase name="managerEmitterMaintenanceTest" classname="azkaban.metric.MetricManagerTest" time="0.001"/>
+  <system-out><![CDATA[4226 [Test worker] INFO azkaban.metric.MetricReportManager  - Instantiating MetricReportManager
+4226 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Instantiating Metric Manager
+4226 [Test worker] INFO azkaban.metric.MetricReportManager  - Enabling Metric Manager
+4227 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Adding FakeMetric metric in Metric Manager
+4227 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Notifying Manager for azkaban.metric.FakeMetric
+4227 [Test worker] DEBUG azkaban.metric.MetricReportManager  - Submitting FakeMetric metric for metric emission pool
+4229 [pool-9-thread-1] INFO azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - First time capturing metric: FakeMetric
+4229 [pool-9-thread-1] DEBUG azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - Ingesting metric: FakeMetric
+6234 [Test worker] DEBUG azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - selecting snapshots within time frame
+6235 [Test worker] DEBUG azkaban.metric.inmemoryemitter.InMemoryMetricEmitter  - selecting snapshots evenly from across the time interval
+6236 [Test worker] ERROR azkaban.metric.MetricReportManager  - Failed to add metric
+6236 [Test worker] INFO azkaban.metric.MetricReportManager  - Disabling Metric Manager
+6236 [Test worker] INFO azkaban.metric.MetricReportManager  - Enabling Metric Manager
+6237 [Test worker] ERROR azkaban.metric.MetricReportManager  - Failed to add metric
+6237 [Test worker] ERROR azkaban.metric.MetricReportManager  - Failed to add metric
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

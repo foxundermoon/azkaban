@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.execapp.JobRunnerTest" tests="7" skipped="4" failures="0" errors="0" timestamp="2016-04-13T08:41:35" hostname="zexinBian-MacBook-Pro.local" time="2.558">
+<testsuite name="azkaban.execapp.JobRunnerTest" tests="7" skipped="4" failures="0" errors="0" timestamp="2016-05-10T04:22:58" hostname="zexinBian-MacBook-Pro.local" time="2.571">
   <properties/>
-  <testcase name="testDelayedExecutionCancelledJob" classname="azkaban.execapp.JobRunnerTest" time="2.554"/>
+  <testcase name="testDelayedExecutionCancelledJob" classname="azkaban.execapp.JobRunnerTest" time="2.567"/>
   <testcase name="testBasicRun" classname="azkaban.execapp.JobRunnerTest" time="0.0">
     <skipped/>
   </testcase>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.trigger.ConditionTest" tests="2" skipped="1" failures="0" errors="0" timestamp="2016-04-13T08:41:24" hostname="zexinBian-MacBook-Pro.local" time="0.003">
+<testsuite name="azkaban.trigger.ConditionTest" tests="2" skipped="1" failures="0" errors="0" timestamp="2016-05-10T04:22:47" hostname="zexinBian-MacBook-Pro.local" time="0.004">
   <properties/>
   <testcase name="jsonConversionTest" classname="azkaban.trigger.ConditionTest" time="0.0">
     <skipped/>
   </testcase>
-  <testcase name="conditionTest" classname="azkaban.trigger.ConditionTest" time="0.003"/>
+  <testcase name="conditionTest" classname="azkaban.trigger.ConditionTest" time="0.004"/>
   <system-out><![CDATA[Setting expression ( thresholdchecker1.eval() && thresholdchecker2.eval() ) || ( thresholdchecker1.eval() && !thresholdchecker2.eval() )
-26574 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition ( thresholdchecker1.eval() && thresholdchecker2.eval() ) || ( thresholdchecker1.eval() && !thresholdchecker2.eval() )
+26464 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition ( thresholdchecker1.eval() && thresholdchecker2.eval() ) || ( thresholdchecker1.eval() && !thresholdchecker2.eval() )
 Setting expression ( thresholdchecker1.eval() && thresholdchecker2.eval() ) || ( thresholdchecker1.eval() && thresholdchecker2.eval() )
-26575 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition ( thresholdchecker1.eval() && thresholdchecker2.eval() ) || ( thresholdchecker1.eval() && thresholdchecker2.eval() )
+26465 [Test worker] DEBUG azkaban.trigger.Condition  - Testing condition ( thresholdchecker1.eval() && thresholdchecker2.eval() ) || ( thresholdchecker1.eval() && thresholdchecker2.eval() )
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

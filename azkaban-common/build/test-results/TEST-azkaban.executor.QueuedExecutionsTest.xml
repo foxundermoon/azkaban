@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.executor.QueuedExecutionsTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2016-04-13T08:40:58" hostname="zexinBian-MacBook-Pro.local" time="0.052">
+<testsuite name="azkaban.executor.QueuedExecutionsTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2016-05-10T04:22:21" hostname="zexinBian-MacBook-Pro.local" time="0.052">
   <properties/>
-  <testcase name="testEnqueueHappyCase" classname="azkaban.executor.QueuedExecutionsTest" time="0.006"/>
-  <testcase name="testEnqueueAll" classname="azkaban.executor.QueuedExecutionsTest" time="0.007"/>
-  <testcase name="testGetReferences" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
-  <testcase name="testClear" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
-  <testcase name="testSize" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
-  <testcase name="testHasExecution" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
-  <testcase name="testFetchHead" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
-  <testcase name="testGetFlow" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
+  <testcase name="testEnqueueHappyCase" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
+  <testcase name="testEnqueueAll" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
+  <testcase name="testGetReferences" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
+  <testcase name="testClear" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
+  <testcase name="testSize" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
+  <testcase name="testHasExecution" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
+  <testcase name="testFetchHead" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
+  <testcase name="testGetFlow" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
   <testcase name="testEnqueueDuplicateExecution" classname="azkaban.executor.QueuedExecutionsTest" time="0.002"/>
   <testcase name="testDequeue" classname="azkaban.executor.QueuedExecutionsTest" time="0.003"/>
   <testcase name="testEnqueueOverflow" classname="azkaban.executor.QueuedExecutionsTest" time="0.002"/>
-  <testcase name="testIsFull" classname="azkaban.executor.QueuedExecutionsTest" time="0.007"/>
+  <testcase name="testIsFull" classname="azkaban.executor.QueuedExecutionsTest" time="0.004"/>
   <testcase name="testIsEmpty" classname="azkaban.executor.QueuedExecutionsTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.executor.JdbcExecutorLoaderTest" tests="30" skipped="3" failures="0" errors="0" timestamp="2016-04-13T08:40:58" hostname="zexinBian-MacBook-Pro.local" time="0.032">
+<testsuite name="azkaban.executor.JdbcExecutorLoaderTest" tests="30" skipped="3" failures="0" errors="0" timestamp="2016-05-10T04:22:21" hostname="zexinBian-MacBook-Pro.local" time="0.021">
   <properties/>
   <testcase name="testMissingExecutorUpdate" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
   <testcase name="testExecutorActivation" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
@@ -8,35 +8,35 @@
   <testcase name="testSingleExecutorFetchById" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
   <testcase name="testDuplicateAddExecutor" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
   <testcase name="testFetchNoQueuedFlows" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testExecutorInactivation" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
+  <testcase name="testExecutorInactivation" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
   <testcase name="testAssignAndFetchExecutor" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testUnassignExecutorException" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testLargeUploadLog" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001">
+  <testcase name="testUnassignExecutorException" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testLargeUploadLog" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0">
     <skipped/>
   </testcase>
-  <testcase name="testActiveReference" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testFetchEmptyExecutorEvents" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testUpdateExecutionFlows" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testFetchExecutorByQueuedExecution" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
+  <testcase name="testActiveReference" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testFetchEmptyExecutorEvents" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testUpdateExecutionFlows" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testFetchExecutorByQueuedExecution" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
   <testcase name="testFetchQueuedFlows" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
-  <testcase name="testFetchMissingExecutorByExecution" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
+  <testcase name="testFetchMissingExecutorByExecution" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.002"/>
   <testcase name="testAssignExecutorInvalidExecutor" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
   <testcase name="testExecutorEvents" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
-  <testcase name="testFetchMissingExecutorId" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testAssignExecutorInvalidExecution" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testUnassignExecutor" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testRemoveExecutionLogsByTime" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001">
+  <testcase name="testFetchMissingExecutorId" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testAssignExecutorInvalidExecution" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testUnassignExecutor" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testRemoveExecutionLogsByTime" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0">
     <skipped/>
   </testcase>
-  <testcase name="testSmallUploadLog" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001">
+  <testcase name="testSmallUploadLog" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0">
     <skipped/>
   </testcase>
-  <testcase name="testFetchEmptyExecutors" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testUploadExecutionFlows" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testFetchMissingExecutorHostPort" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testFetchEmptyActiveExecutors" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testUploadExecutableNode" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
-  <testcase name="testSingleExecutorFetchHostPort" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.001"/>
+  <testcase name="testFetchEmptyExecutors" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testUploadExecutionFlows" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testFetchMissingExecutorHostPort" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testFetchEmptyActiveExecutors" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testUploadExecutableNode" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
+  <testcase name="testSingleExecutorFetchHostPort" classname="azkaban.executor.JdbcExecutorLoaderTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Communications link failure
 
@@ -132,12 +132,14 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communicatio
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+Skipping DB test because Db not setup.
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
 	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
 	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1129)
 	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:358)
+Skipping DB test because Db not setup.
 	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2489)
 	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2526)
 	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2311)
@@ -153,6 +155,8 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
 	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
 	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556)
+Skipping DB test because Db not setup.
+Skipping DB test because Db not setup.
 	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545)
 	... 4 more
 Caused by: java.net.ConnectException: Connection refused
@@ -168,10 +172,6 @@ Caused by: java.net.ConnectException: Connection refused
 	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
 	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:308)
 	... 20 more
-Skipping DB test because Db not setup.
-Skipping DB test because Db not setup.
-Skipping DB test because Db not setup.
-Skipping DB test because Db not setup.
 Skipping DB test because Db not setup.
 Skipping DB test because Db not setup.
 Skipping DB test because Db not setup.
