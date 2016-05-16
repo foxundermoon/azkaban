@@ -1,3 +1,8 @@
+# 说明
+
+根据linkedin开源的Azkaban项目进行修改，针对自己的业务逻辑增加相关功能，同时对原先Azkaban中一些不够友好的地方进行了修改。
+
+
 Azkaban 3 [![Build Status](http://img.shields.io/travis/azkaban/azkaban.svg?style=flat)](https://travis-ci.org/azkaban/azkaban)
 ========
 
