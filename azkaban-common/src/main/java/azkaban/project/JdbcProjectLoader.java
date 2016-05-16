@@ -16,41 +16,23 @@
 
 package azkaban.project;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import azkaban.database.AbstractJdbcLoader;
+import azkaban.flow.Flow;
+import azkaban.project.ProjectLogEvent.EventType;
+import azkaban.user.Permission;
+import azkaban.user.User;
+import azkaban.utils.*;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-import azkaban.database.AbstractJdbcLoader;
-import azkaban.flow.Flow;
-import azkaban.project.ProjectLogEvent.EventType;
-import azkaban.user.Permission;
-import azkaban.user.User;
-import azkaban.utils.GZIPUtils;
-import azkaban.utils.JSONUtils;
-import azkaban.utils.Md5Hasher;
-import azkaban.utils.Pair;
-import azkaban.utils.Props;
-import azkaban.utils.PropsUtils;
-import azkaban.utils.Triple;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 
 public class JdbcProjectLoader extends AbstractJdbcLoader implements
     ProjectLoader {
@@ -387,6 +369,23 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
     final String INSERT_PROJECT_FILES =
         "INSERT INTO project_files (project_id, version, chunk, size, file) values (?,?,?,?,?)";
 
+    /**
+     * modify the logic for upload project files <start>
+     * 1.delete the exist project files record according to the project_id;
+     * 2.insert project files record.
+     */
+    final String DELETE_PROJECT_FILES =
+            "DELETE FROM project_files WHERE project_id = ?";
+    try {
+      logger.error("Running delete project files, project_id=" + project.getId());
+      runner.update(connection, DELETE_PROJECT_FILES, project.getId());
+    } catch (SQLException ex) {
+      logger.error("Delete Project files error, project_id=" + project.getId());
+    }
+    /**
+     * modify the logic for upload project files <end>
+     */
+
     BufferedInputStream bufferedStream = null;
     int chunk = 0;
     try {
@@ -704,8 +703,13 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
     long updateTime = System.currentTimeMillis();
     final String UPDATE_INACTIVE_PROJECT =
         "UPDATE projects SET active=false,modified_time=?,last_modified_by=? WHERE id=?";
+
+    //modify for delete project logic
+    final String DELETE_INACTIVE_PROJECT =
+            "DELETE FROM project_files WHERE project_id=?";
     try {
       runner.update(UPDATE_INACTIVE_PROJECT, updateTime, user, project.getId());
+      runner.update(DELETE_INACTIVE_PROJECT, project.getId());
     } catch (SQLException e) {
       logger.error(e);
       throw new ProjectManagerException("Error marking project "
