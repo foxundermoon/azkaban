@@ -16,18 +16,17 @@
 
 package azkaban.execapp;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.zip.ZipFile;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-
+import azkaban.flow.CommonJobProperties;
 import azkaban.project.ProjectFileHandler;
 import azkaban.project.ProjectLoader;
 import azkaban.project.ProjectManagerException;
 import azkaban.utils.FileIOUtils;
 import azkaban.utils.Utils;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+
+import java.io.*;
+import java.util.zip.ZipFile;
 
 public class ProjectVersion implements Comparable<ProjectVersion> {
   private final int projectId;
@@ -80,6 +79,35 @@ public class ProjectVersion implements Comparable<ProjectVersion> {
           Utils.unzip(zip, tempDir);
 
           tempDir.renameTo(installedDir);
+          /**
+           * 修改多job使用相同参数的问题
+           * -----start-----
+           */
+          File initParameterFile = new File(installedDir.getAbsolutePath() + File.separator + installedDir.list()[0]
+                  + File.separator + CommonJobProperties.INIT_PARAMETER_SHELL);
+          String initPropertiesPath = installedDir.getAbsolutePath() + File.separator + installedDir.list()[0]
+                  + File.separator + CommonJobProperties.INIT_PARAMETER_PROPERTIES;
+          if (initParameterFile.exists()) {
+            Process pcs = Runtime.getRuntime().exec("sh " + initParameterFile.getAbsolutePath());
+            String lineStr;
+            BufferedInputStream in = new BufferedInputStream(pcs.getInputStream());
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            File propertiesFile = new File(initPropertiesPath);
+            if (propertiesFile.exists()) {
+              propertiesFile.delete();
+            }
+            while ((lineStr = br.readLine()) != null) {
+              FileWriter writer = new FileWriter(initPropertiesPath, true);
+              writer.write(lineStr + "\r\n");
+              writer.close();
+            }
+            br.close();
+            in.close();
+          }
+          /**
+           * 修改多job使用相同参数的问题
+           * -----end-----
+           */
         } else {
           throw new IOException("The file type hasn't been decided yet.");
         }
@@ -100,6 +128,7 @@ public class ProjectVersion implements Comparable<ProjectVersion> {
       throw new IOException("Execution dir doesn't exist: "
           + ((executionDir == null) ? null : executionDir.getAbsolutePath()));
     }
+
     FileIOUtils.createDeepSymlink(installedDir, executionDir);
   }
 
