@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="azkaban.trigger.TriggerTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2016-05-10T04:22:49" hostname="zexinBian-MacBook-Pro.local" time="0.001">
-  <properties/>
-  <testcase name="jsonConversionTest" classname="azkaban.trigger.TriggerTest" time="0.001">
-    <skipped/>
-  </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
