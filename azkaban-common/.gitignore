@@ -1,3 +1,4 @@
 build/
 TestProcess*
 *.gitignore.swp
+*.class
