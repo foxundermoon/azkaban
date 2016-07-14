@@ -1,4 +1,0 @@
--o
-/Users/bianzexin/Documents/azkaban/azkaban-common/build/binaries/mainExecutable/main
-/Users/bianzexin/Documents/azkaban/azkaban-common/build/objs/mainExecutable/mainC/c9j2ag5twf7sq1h3urh9vie54/execute-as-user.o
--m64

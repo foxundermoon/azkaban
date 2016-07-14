@@ -1,4 +1,0 @@
-See file:///Users/bianzexin/Documents/azkaban/azkaban-common/build/tmp/linkMainExecutable/output.txt for all output for linkMainExecutable.
-linking main successful.
-
-Finished linkMainExecutable, see full log file:///Users/bianzexin/Documents/azkaban/azkaban-common/build/tmp/linkMainExecutable/output.txt.
