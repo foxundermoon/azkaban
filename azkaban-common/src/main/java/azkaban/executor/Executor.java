@@ -16,8 +16,9 @@
 
 package azkaban.executor;
 
-import java.util.Date;
 import azkaban.utils.Utils;
+
+import java.util.Date;
 
 /**
  * Class to represent an AzkabanExecutorServer details for ExecutorManager
@@ -29,6 +30,7 @@ public class Executor implements Comparable<Executor> {
   private final String host;
   private final int port;
   private boolean isActive;
+  private String clusterGroup;
   // cached copy of the latest statistics from  the executor.
   private ExecutorInfo cachedExecutorStats;
   private Date lastStatsUpdatedTime;
@@ -40,9 +42,9 @@ public class Executor implements Comparable<Executor> {
    * integer range
    * </pre>
    *
-   * @param executor_id
-   * @param executor_host
-   * @param executor_port
+   * @param id
+   * @param host
+   * @param port
    */
   public Executor(int id, String host, int port, boolean isActive) {
     if (!Utils.isValidPort(port)) {
@@ -64,6 +66,7 @@ public class Executor implements Comparable<Executor> {
     result = prime * result + ((host == null) ? 0 : host.hashCode());
     result = prime * result + id;
     result = prime * result + port;
+    result = prime * result + ((clusterGroup == null) ? 0 : clusterGroup.hashCode());
     return result;
   }
 
@@ -111,6 +114,10 @@ public class Executor implements Comparable<Executor> {
 
   public int getId() {
     return id;
+  }
+
+  public String getClusterGroup() {
+    return clusterGroup;
   }
 
   public ExecutorInfo getExecutorInfo() {

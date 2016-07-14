@@ -37,6 +37,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -224,12 +226,16 @@ public class ExecutorManager extends EventHandler implements
     }
   }
 
+  /**
+   * 判断是否是multiExecutorMode
+   * @return
+     */
   private boolean isMultiExecutorMode() {
     return azkProps.getBoolean(AZKABAN_USE_MULTIPLE_EXECUTORS, false);
   }
 
   /**
-   * Refresh Executor stats for all the actie executors in this executorManager
+   * Refresh Executor stats for all the active executors in this executorManager
    */
   private void refreshExecutors() {
     synchronized (activeExecutors) {
@@ -239,15 +245,15 @@ public class ExecutorManager extends EventHandler implements
       for (final Executor executor : activeExecutors) {
         // execute each executorInfo refresh task to fetch
         Future<String> fetchExecutionInfo =
-          executorInforRefresherService.submit(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-              return callExecutorForJsonString(executor.getHost(),
-                executor.getPort(), "/serverStatistics", null);
-            }
-          });
+                executorInforRefresherService.submit(new Callable<String>() {
+                  @Override
+                  public String call() throws Exception {
+                    return callExecutorForJsonString(executor.getHost(),
+                            executor.getPort(), "/serverStatistics", null);
+                  }
+                });
         futures.add(new Pair<Executor, Future<String>>(executor,
-          fetchExecutionInfo));
+                fetchExecutionInfo));
       }
 
       boolean wasSuccess = true;
@@ -399,6 +405,18 @@ public class ExecutorManager extends EventHandler implements
       }
     }
     return executorLoader.fetchExecutor(executorId);
+  }
+
+  @Override
+  public List<Executor> fetchExecutor(String clusterGroup) throws ExecutorManagerException {
+    List<Executor> executors = new ArrayList<Executor>();
+    for(Executor executor : activeExecutors) {
+      if (clusterGroup.equalsIgnoreCase(executor.getClusterGroup())) {
+        executors.add(executor);
+      }
+      return executors;
+    }
+    return executorLoader.fetchExecutor(clusterGroup);
   }
 
   @Override
@@ -1884,10 +1902,9 @@ public class ExecutorManager extends EventHandler implements
             dispatch(reference, exflow, selectedExecutor);
           } catch (ExecutorManagerException e) {
             logger.warn(String.format(
-              "Executor %s responded with exception for exec: %d",
-              selectedExecutor, exflow.getExecutionId()), e);
-            handleDispatchExceptionCase(reference, exflow, selectedExecutor,
-              availableExecutors);
+                    "Executor %s responded with exception for exec: %d",
+                    selectedExecutor, exflow.getExecutionId()), e);
+            handleDispatchExceptionCase(reference, exflow, selectedExecutor, availableExecutors);
           }
         } else {
           handleNoExecutorSelectedCase(reference, exflow);
@@ -1896,37 +1913,63 @@ public class ExecutorManager extends EventHandler implements
     }
 
     /* Helper method to fetch  overriding Executor, if a valid user has specifed otherwise return null */
-    private Executor getUserSpecifiedExecutor(ExecutionOptions options,
-      int executionId) {
+    private Executor getUserSpecifiedExecutor(ExecutableFlow exflow, Set<Executor> availableExecutors) {
       Executor executor = null;
-      if (options != null
-        && options.getFlowParameters() != null
-        && options.getFlowParameters().containsKey(
-          ExecutionOptions.USE_EXECUTOR)) {
+      if (exflow.getExecutionOptions() != null
+              && exflow.getExecutionOptions().getFlowParameters() != null
+              && exflow.getExecutionOptions().getFlowParameters().containsKey(
+              ExecutionOptions.USE_EXECUTOR)) {
         try {
-          int executorId =
-            Integer.valueOf(options.getFlowParameters().get(
-              ExecutionOptions.USE_EXECUTOR));
-          executor = fetchExecutor(executorId);
-
-          if (executor == null) {
-            logger
-              .warn(String
-                .format(
-                  "User specified executor id: %d for execution id: %d is not active, Looking up db.",
-                  executorId, executionId));
-            executor = executorLoader.fetchExecutor(executorId);
+          String userExecutorOption = exflow.getExecutionOptions().getFlowParameters().get(ExecutionOptions.USE_EXECUTOR);
+          boolean isNum = StringUtils.isNumeric(userExecutorOption);
+          if (isNum) {
+            int executorId = Integer.valueOf(userExecutorOption);
+            executor = fetchExecutor(executorId);
             if (executor == null) {
-              logger
-                .warn(String
-                  .format(
-                    "User specified executor id: %d for execution id: %d is missing from db. Defaulting to availableExecutors",
-                    executorId, executionId));
+              logger.warn(String.format(
+                      "User specified executor id: %d for execution id: %d is not active, Looking up db.",
+                      executorId, exflow.getExecutionId()));
+              executor = executorLoader.fetchExecutor(executorId);
+              if (executor == null) {
+                logger.warn(String.format(
+                        "User specified executor id: %d for execution id: %d is missing from db. Defaulting to availableExecutors",
+                        executorId, exflow.getExecutionId()));
+              }
+            }
+          } else {
+            /**
+             * 这部分为新增逻辑,根据USE_EXECUTOR参数(String)类型分发到对应的集群的executor上
+             */
+            List<Executor> executors = null;
+            executors = fetchExecutor(userExecutorOption);
+            if (executors == null || executors.isEmpty()) {
+              logger.warn(String.format(
+                      "User specified executor for clusterGrop: %s for execution id: %d is not active, Looking up db.",
+                      userExecutorOption, exflow.getExecutionId()));
+              executors = executorLoader.fetchExecutor(userExecutorOption);
+              if (executors == null || executors.isEmpty()) {
+                logger.warn(String.format(
+                        "User specified executor for clusterGroup: %s for execution id: %d is missing from db. " +
+                                "Defaulting to availableExecutors",
+                        userExecutorOption, exflow.getExecutionId()));
+              } else {
+                Set<Executor> executorList = new HashSet<>();
+                for (Executor executor1 : executors) {
+                  for (Executor aliveExecutor : availableExecutors) {
+                    if (aliveExecutor.getId() == executor1.getId()) {
+                      executorList.add(aliveExecutor);
+                      break;
+                    }
+                  }
+                }
+                ExecutorSelector selector = new ExecutorSelector(filterList, comparatorWeightsMap);
+                executor = selector.getBest(executorList, exflow);
+              }
             }
           }
         } catch (ExecutorManagerException ex) {
           logger.error("Failed to fetch user specified executor for exec_id = "
-            + executionId, ex);
+                  + exflow.getExecutionId(), ex);
         }
       }
       return executor;
@@ -1935,9 +1978,7 @@ public class ExecutorManager extends EventHandler implements
     /* Choose Executor for exflow among the available executors */
     private Executor selectExecutor(ExecutableFlow exflow,
       Set<Executor> availableExecutors) {
-      Executor choosenExecutor =
-        getUserSpecifiedExecutor(exflow.getExecutionOptions(),
-          exflow.getExecutionId());
+      Executor choosenExecutor = getUserSpecifiedExecutor(exflow, availableExecutors);
 
       // If no executor was specified by admin
       if (choosenExecutor == null) {
@@ -1952,11 +1993,9 @@ public class ExecutorManager extends EventHandler implements
     private void handleDispatchExceptionCase(ExecutionReference reference,
       ExecutableFlow exflow, Executor lastSelectedExecutor,
       Set<Executor> remainingExecutors) throws ExecutorManagerException {
-      logger
-        .info(String
-          .format(
-            "Reached handleDispatchExceptionCase stage for exec %d with error count %d",
-            exflow.getExecutionId(), reference.getNumErrors()));
+      logger.info(String.format(
+              "Reached handleDispatchExceptionCase stage for exec %d with error count %d",
+              exflow.getExecutionId(), reference.getNumErrors()));
       reference.setNumErrors(reference.getNumErrors() + 1);
       if (reference.getNumErrors() > this.maxDispatchingErrors
         || remainingExecutors.size() <= 1) {
@@ -1971,11 +2010,9 @@ public class ExecutorManager extends EventHandler implements
 
     private void handleNoExecutorSelectedCase(ExecutionReference reference,
       ExecutableFlow exflow) throws ExecutorManagerException {
-      logger
-      .info(String
-        .format(
-          "Reached handleNoExecutorSelectedCase stage for exec %d with error count %d",
-            exflow.getExecutionId(), reference.getNumErrors()));
+      logger.info(String.format(
+              "Reached handleNoExecutorSelectedCase stage for exec %d with error count %d",
+              exflow.getExecutionId(), reference.getNumErrors()));
       // TODO: handle scenario where a high priority flow failing to get
       // schedule can starve all others
       queuedFlows.enqueue(exflow, reference);

@@ -102,6 +102,20 @@ public interface ExecutorLoader {
    */
   public Executor fetchExecutor(int executorId) throws ExecutorManagerException;
 
+
+  /**
+   * <pre>
+   * Fetch executor from executors with a give clusterGroup
+   * Note:
+   * 1. throws an Exception in case of a SQL issue
+   * 2. return null when no executor is found with the given clusterGroup
+   * </pre>
+   * @param clusterGroup
+   * @return
+   * @throws ExecutorManagerException
+     */
+  public List<Executor> fetchExecutor(String clusterGroup) throws ExecutorManagerException;
+
   /**
    * <pre>
    * create an executor and insert in executors table.

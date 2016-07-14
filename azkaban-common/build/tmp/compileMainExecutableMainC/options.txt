@@ -2,5 +2,5 @@
 c
 -c
 -I
-/Users/bianzexin/Documents/workspace/bigdata/azkaban/azkaban-common/src/main/headers
+/Users/bianzexin/Documents/azkaban/azkaban-common/src/main/headers
 -m64

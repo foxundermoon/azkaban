@@ -889,6 +889,24 @@ public class JdbcExecutorLoader extends AbstractJdbcLoader implements
     }
   }
 
+  @Override
+  public List<Executor> fetchExecutor(String clusterGroup) throws ExecutorManagerException {
+    QueryRunner runner = createQueryRunner();
+    FetchExecutorHandler fetchExecutorHandler = new FetchExecutorHandler();
+    try {
+      List<Executor> executors = runner.query(FetchExecutorHandler.FETCH_EXECUTOR_BY_CLUSTERGROUP,
+              fetchExecutorHandler, clusterGroup);
+      if (executors.isEmpty()) {
+        return null;
+      } else {
+        return executors;
+      }
+    } catch (Exception e) {
+      throw new ExecutorManagerException(String.format(
+              "Error fetching executor with clusterGroup: %s", clusterGroup), e);
+    }
+  }
+
   /**
    * {@inheritDoc}
    *
@@ -1497,7 +1515,7 @@ public class JdbcExecutorLoader extends AbstractJdbcLoader implements
     private static String FETCH_ALL_EXECUTORS =
       "SELECT id, host, port, active FROM executors";
     private static String FETCH_ACTIVE_EXECUTORS =
-      "SELECT id, host, port, active FROM executors where active=true";
+      "SELECT id, host, port, active, clusterGroup FROM executors where active=true";
     private static String FETCH_EXECUTOR_BY_ID =
       "SELECT id, host, port, active FROM executors where id=?";
     private static String FETCH_EXECUTOR_BY_HOST_PORT =
@@ -1506,6 +1524,12 @@ public class JdbcExecutorLoader extends AbstractJdbcLoader implements
       "SELECT ex.id, ex.host, ex.port, ex.active FROM "
         + " executors ex INNER JOIN execution_flows ef "
         + "on ex.id = ef.executor_id  where exec_id=?";
+    /**
+     * add new function
+     * dispatch executor according to the clusterGroup
+     */
+    private static String FETCH_EXECUTOR_BY_CLUSTERGROUP =
+            "SELECT id, host, port, active FROM executors where active=true AND clusterGroup=?";
 
     @Override
     public List<Executor> handle(ResultSet rs) throws SQLException {

@@ -16,17 +16,17 @@
 
 package azkaban.executor;
 
+import azkaban.project.Project;
+import azkaban.utils.FileIOUtils.JobMetaData;
+import azkaban.utils.FileIOUtils.LogData;
+import azkaban.utils.Pair;
+
 import java.io.IOException;
 import java.lang.Thread.State;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import azkaban.project.Project;
-import azkaban.utils.FileIOUtils.JobMetaData;
-import azkaban.utils.FileIOUtils.LogData;
-import azkaban.utils.Pair;
 
 public interface ExecutorManagerAdapter {
 
@@ -230,6 +230,9 @@ public interface ExecutorManagerAdapter {
    *
    */
   public Executor fetchExecutor(int executorId) throws ExecutorManagerException;
+
+
+  public List<Executor> fetchExecutor(String clusterGroup) throws ExecutorManagerException;
 
   /**
    * <pre>

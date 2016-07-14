@@ -142,7 +142,7 @@ public class HttpRequestUtils {
       params.remove(ExecutionOptions.USE_EXECUTOR);
     } else {
       validateIntegerParam(params, ExecutionOptions.FLOW_PRIORITY);
-      validateIntegerParam(params, ExecutionOptions.USE_EXECUTOR);
+//      validateIntegerParam(params, ExecutionOptions.USE_EXECUTOR);
     }
   }
 

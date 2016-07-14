@@ -16,27 +16,6 @@
 
 package azkaban.execapp;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-
-import org.apache.log4j.Appender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Layout;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-
 import azkaban.event.Event;
 import azkaban.event.Event.Type;
 import azkaban.event.EventHandler;
@@ -46,14 +25,8 @@ import azkaban.execapp.event.JobCallbackManager;
 import azkaban.execapp.jmx.JmxJobMBeanManager;
 import azkaban.execapp.metric.NumFailedJobMetric;
 import azkaban.execapp.metric.NumRunningJobMetric;
-import azkaban.executor.ExecutableFlow;
-import azkaban.executor.ExecutableFlowBase;
-import azkaban.executor.ExecutableNode;
-import azkaban.executor.ExecutionOptions;
+import azkaban.executor.*;
 import azkaban.executor.ExecutionOptions.FailureAction;
-import azkaban.executor.ExecutorLoader;
-import azkaban.executor.ExecutorManagerException;
-import azkaban.executor.Status;
 import azkaban.flow.FlowProps;
 import azkaban.jobExecutor.ProcessJob;
 import azkaban.jobtype.JobTypeManager;
@@ -63,6 +36,15 @@ import azkaban.project.ProjectManagerException;
 import azkaban.utils.Props;
 import azkaban.utils.PropsUtils;
 import azkaban.utils.SwapQueue;
+import org.apache.log4j.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  * Class that handles the running of a ExecutableFlow DAG

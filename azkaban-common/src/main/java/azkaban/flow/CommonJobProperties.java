@@ -168,4 +168,11 @@ public class CommonJobProperties {
   public static final String FLOW_START_TIMEZONE =
       "azkaban.flow.start.timezone";
 
+
+  /**
+   *多job间共享变量
+   */
+  public static final String INIT_PARAMETER_SHELL = "initParameter.sh";
+  public static final String SYSTEM_PROPERTIES = "system.properties";
+  public static final String INIT_PARAMETER_PROPERTIES = "initParameter.properties";
 }
