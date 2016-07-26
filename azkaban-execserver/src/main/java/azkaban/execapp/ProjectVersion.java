@@ -83,26 +83,41 @@ public class ProjectVersion implements Comparable<ProjectVersion> {
            * 修改多job使用相同参数的问题
            * -----start-----
            */
-          File initParameterFile = new File(installedDir.getAbsolutePath() + File.separator + installedDir.list()[0]
-                  + File.separator + CommonJobProperties.INIT_PARAMETER_SHELL);
-          String initPropertiesPath = installedDir.getAbsolutePath() + File.separator + installedDir.list()[0]
-                  + File.separator + CommonJobProperties.INIT_PARAMETER_PROPERTIES;
-          if (initParameterFile.exists()) {
-            Process pcs = Runtime.getRuntime().exec("sh " + initParameterFile.getAbsolutePath());
-            String lineStr;
-            BufferedInputStream in = new BufferedInputStream(pcs.getInputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            File propertiesFile = new File(initPropertiesPath);
-            if (propertiesFile.exists()) {
-              propertiesFile.delete();
+          int folderSize = installedDir.list().length;
+          if (folderSize > 0) {
+            String folderName = "";
+            for (String name : installedDir.list()) {
+              //使用mac进行文件打包时会产生__MACOSX文件夹,需要排除掉
+              if ("__MACOSX".equalsIgnoreCase(name) || name.startsWith("_")) {
+                continue;
+              } else {
+                folderName = name;
+                break;
+              }
             }
-            while ((lineStr = br.readLine()) != null) {
-              FileWriter writer = new FileWriter(initPropertiesPath, true);
-              writer.write(lineStr + "\r\n");
-              writer.close();
+            if (folderName.length() > 0) {
+              File initParameterFile = new File(installedDir.getAbsolutePath() + File.separator + folderName
+                      + File.separator + CommonJobProperties.INIT_PARAMETER_SHELL);
+              String initPropertiesPath = installedDir.getAbsolutePath() + File.separator + folderName
+                      + File.separator + CommonJobProperties.INIT_PARAMETER_PROPERTIES;
+              if (initParameterFile.exists()) {
+                Process pcs = Runtime.getRuntime().exec("sh " + initParameterFile.getAbsolutePath());
+                String lineStr;
+                BufferedInputStream in = new BufferedInputStream(pcs.getInputStream());
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                File propertiesFile = new File(initPropertiesPath);
+                if (propertiesFile.exists()) {
+                  propertiesFile.delete();
+                }
+                while ((lineStr = br.readLine()) != null) {
+                  FileWriter writer = new FileWriter(initPropertiesPath, true);
+                  writer.write(lineStr + "\r\n");
+                  writer.close();
+                }
+                br.close();
+                in.close();
+              }
             }
-            br.close();
-            in.close();
           }
           /**
            * 修改多job使用相同参数的问题
