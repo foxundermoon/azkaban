@@ -139,7 +139,7 @@ public class HttpRequestUtils {
     // is azkaban Admin
     if (!hasPermission(userManager, user, Type.ADMIN)) {
       params.remove(ExecutionOptions.FLOW_PRIORITY);
-      params.remove(ExecutionOptions.USE_EXECUTOR);
+//      params.remove(ExecutionOptions.USE_EXECUTOR);
     } else {
       validateIntegerParam(params, ExecutionOptions.FLOW_PRIORITY);
 //      validateIntegerParam(params, ExecutionOptions.USE_EXECUTOR);
