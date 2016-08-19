@@ -52,23 +52,16 @@ public class ProjectVersion implements Comparable<ProjectVersion> {
     return version;
   }
 
-  public synchronized void setupProjectFiles(ProjectLoader projectLoader,
-      File projectDir, Logger logger) throws ProjectManagerException,
-      IOException {
-    String projectVersion =
-        String.valueOf(projectId) + "." + String.valueOf(version);
+  public synchronized void setupProjectFiles(ProjectLoader projectLoader, File projectDir, Logger logger) throws ProjectManagerException,
+          IOException {
+    String projectVersion = String.valueOf(projectId) + "." + String.valueOf(version);
     if (installedDir == null) {
       installedDir = new File(projectDir, projectVersion);
     }
 
     if (!installedDir.exists()) {
-
-      logger.info("First time executing new project. Setting up in directory "
-          + installedDir.getPath());
-
-      File tempDir =
-          new File(projectDir, "_temp." + projectVersion + "."
-              + System.currentTimeMillis());
+      logger.info("First time executing new project. Setting up in directory " + installedDir.getPath());
+      File tempDir = new File(projectDir, "_temp." + projectVersion + "." + System.currentTimeMillis());
       tempDir.mkdirs();
       ProjectFileHandler projectFileHandler = null;
       try {
@@ -77,52 +70,8 @@ public class ProjectVersion implements Comparable<ProjectVersion> {
           logger.info("Downloading zip file.");
           ZipFile zip = new ZipFile(projectFileHandler.getLocalFile());
           Utils.unzip(zip, tempDir);
-
           tempDir.renameTo(installedDir);
-          /**
-           * 修改多job使用相同参数的问题
-           * -----start-----
-           */
-          int folderSize = installedDir.list().length;
-          if (folderSize > 0) {
-            String folderName = "";
-            for (String name : installedDir.list()) {
-              //使用mac进行文件打包时会产生__MACOSX文件夹,需要排除掉
-              if ("__MACOSX".equalsIgnoreCase(name) || name.startsWith("_")) {
-                continue;
-              } else {
-                folderName = name;
-                break;
-              }
-            }
-            if (folderName.length() > 0) {
-              File initParameterFile = new File(installedDir.getAbsolutePath() + File.separator + folderName
-                      + File.separator + CommonJobProperties.INIT_PARAMETER_SHELL);
-              String initPropertiesPath = installedDir.getAbsolutePath() + File.separator + folderName
-                      + File.separator + CommonJobProperties.INIT_PARAMETER_PROPERTIES;
-              if (initParameterFile.exists()) {
-                Process pcs = Runtime.getRuntime().exec("sh " + initParameterFile.getAbsolutePath());
-                String lineStr;
-                BufferedInputStream in = new BufferedInputStream(pcs.getInputStream());
-                BufferedReader br = new BufferedReader(new InputStreamReader(in));
-                File propertiesFile = new File(initPropertiesPath);
-                if (propertiesFile.exists()) {
-                  propertiesFile.delete();
-                }
-                while ((lineStr = br.readLine()) != null) {
-                  FileWriter writer = new FileWriter(initPropertiesPath, true);
-                  writer.write(lineStr + "\r\n");
-                  writer.close();
-                }
-                br.close();
-                in.close();
-              }
-            }
-          }
-          /**
-           * 修改多job使用相同参数的问题
-           * -----end-----
-           */
+          processInitParameter();
         } else {
           throw new IOException("The file type hasn't been decided yet.");
         }
@@ -131,7 +80,56 @@ public class ProjectVersion implements Comparable<ProjectVersion> {
           projectFileHandler.deleteLocalFile();
         }
       }
+    } else {
+      processInitParameter();
     }
+  }
+
+  private void processInitParameter() throws IOException {
+    /**
+     * 修改多job使用相同参数的问题
+     * -----start-----
+     */
+    int folderSize = installedDir.list().length;
+    if (folderSize > 0) {
+      String folderName = "";
+      for (String name : installedDir.list()) {
+        //使用mac进行文件打包时会产生__MACOSX文件夹,需要排除掉
+        if ("__MACOSX".equalsIgnoreCase(name) || name.startsWith("_")) {
+          continue;
+        } else {
+          folderName = name;
+          break;
+        }
+      }
+      if (folderName.length() > 0) {
+        File initParameterFile = new File(installedDir.getAbsolutePath() + File.separator + folderName
+                + File.separator + CommonJobProperties.INIT_PARAMETER_SHELL);
+        String initPropertiesPath = installedDir.getAbsolutePath() + File.separator + folderName
+                + File.separator + CommonJobProperties.INIT_PARAMETER_PROPERTIES;
+        if (initParameterFile.exists()) {
+          Process pcs = Runtime.getRuntime().exec("sh " + initParameterFile.getAbsolutePath());
+          String lineStr;
+          BufferedInputStream in = new BufferedInputStream(pcs.getInputStream());
+          BufferedReader br = new BufferedReader(new InputStreamReader(in));
+          File propertiesFile = new File(initPropertiesPath);
+          if (propertiesFile.exists()) {
+            propertiesFile.delete();
+          }
+          while ((lineStr = br.readLine()) != null) {
+            FileWriter writer = new FileWriter(initPropertiesPath, true);
+            writer.write(lineStr + "\r\n");
+            writer.close();
+          }
+          br.close();
+          in.close();
+        }
+      }
+    }
+    /**
+     * 修改多job使用相同参数的问题
+     * -----end-----
+     */
   }
 
   public synchronized void copyCreateSymlinkDirectory(File executionDir)
