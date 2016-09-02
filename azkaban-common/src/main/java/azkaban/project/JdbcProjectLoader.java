@@ -369,22 +369,22 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
     final String INSERT_PROJECT_FILES =
         "INSERT INTO project_files (project_id, version, chunk, size, file) values (?,?,?,?,?)";
 
-    /**
-     * modify the logic for upload project files <start>
-     * 1.delete the exist project files record according to the project_id;
-     * 2.insert project files record.
-     */
-    final String DELETE_PROJECT_FILES =
-            "DELETE FROM project_files WHERE project_id = ?";
-    try {
-      logger.error("Running delete project files, project_id=" + project.getId());
-      runner.update(connection, DELETE_PROJECT_FILES, project.getId());
-    } catch (SQLException ex) {
-      logger.error("Delete Project files error, project_id=" + project.getId());
-    }
-    /**
-     * modify the logic for upload project files <end>
-     */
+//    /**
+//     * modify the logic for upload project files <start>
+//     * 1.delete the exist project files record according to the project_id;
+//     * 2.insert project files record.
+//     */
+//    final String DELETE_PROJECT_FILES =
+//            "DELETE FROM project_files WHERE project_id = ?";
+//    try {
+//      logger.error("Running delete project files, project_id=" + project.getId());
+//      runner.update(connection, DELETE_PROJECT_FILES, project.getId());
+//    } catch (SQLException ex) {
+//      logger.error("Delete Project files error, project_id=" + project.getId());
+//    }
+//    /**
+//     * modify the logic for upload project files <end>
+//     */
 
     BufferedInputStream bufferedStream = null;
     int chunk = 0;
