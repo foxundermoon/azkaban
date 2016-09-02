@@ -16,18 +16,6 @@
 
 package azkaban.webapp.servlet;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
-
 import azkaban.project.Project;
 import azkaban.project.ProjectManager;
 import azkaban.server.session.Session;
@@ -37,6 +25,14 @@ import azkaban.user.User;
 import azkaban.user.UserManager;
 import azkaban.utils.Pair;
 import azkaban.webapp.AzkabanWebServer;
+import org.apache.log4j.Logger;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * The main page
@@ -186,19 +182,25 @@ public class ProjectServlet extends LoginAbstractAzkabanServlet {
       page.add("hideCreateProject", true);
     }
 
+    List<Project> projects;
     if (hasParam(req, "all")) {
-      List<Project> projects = manager.getProjects();
+      projects = manager.getProjects();
       page.add("viewProjects", "all");
-      page.add("projects", projects);
     } else if (hasParam(req, "group")) {
-      List<Project> projects = manager.getGroupProjects(user);
+      projects = manager.getGroupProjects(user);
       page.add("viewProjects", "group");
-      page.add("projects", projects);
     } else {
-      List<Project> projects = manager.getUserProjects(user);
+      projects = manager.getUserProjects(user);
       page.add("viewProjects", "personal");
-      page.add("projects", projects);
     }
+    Collections.sort(projects, new Comparator() {
+      public int compare(Object a, Object b) {
+        int one = ((Project) a).getId();
+        int two = ((Project) b).getId();
+        return two - one;
+      }
+    });
+    page.add("projects", projects);
 
     page.render();
   }
@@ -221,17 +223,24 @@ public class ProjectServlet extends LoginAbstractAzkabanServlet {
         ((AzkabanWebServer) getApplication()).getProjectManager();
     Page page =
         newPage(req, resp, session, "azkaban/webapp/servlet/velocity/index.vm");
+    List<Project> projects;
     if (hasParam(req, "all")) {
       // do nothing special if one asks for 'ALL' projects
-      List<Project> projects = manager.getProjectsByRegex(searchTerm);
+      projects = manager.getProjectsByRegex(searchTerm);
       page.add("allProjects", "");
-      page.add("projects", projects);
       page.add("search_term", searchTerm);
     } else {
-      List<Project> projects = manager.getUserProjectsByRegex(user, searchTerm);
-      page.add("projects", projects);
+      projects = manager.getUserProjectsByRegex(user, searchTerm);
       page.add("search_term", searchTerm);
     }
+    Collections.sort(projects, new Comparator() {
+      public int compare(Object a, Object b) {
+        int one = ((Project) a).getId();
+        int two = ((Project) b).getId();
+        return two - one;
+      }
+    });
+    page.add("projects", projects);
 
     page.render();
   }
