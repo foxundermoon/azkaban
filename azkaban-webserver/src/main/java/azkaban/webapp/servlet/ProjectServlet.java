@@ -197,7 +197,7 @@ public class ProjectServlet extends LoginAbstractAzkabanServlet {
       public int compare(Object a, Object b) {
         int one = ((Project) a).getId();
         int two = ((Project) b).getId();
-        return two - one;
+        return one - two;
       }
     });
     page.add("projects", projects);
@@ -237,7 +237,7 @@ public class ProjectServlet extends LoginAbstractAzkabanServlet {
       public int compare(Object a, Object b) {
         int one = ((Project) a).getId();
         int two = ((Project) b).getId();
-        return two - one;
+        return one - two;
       }
     });
     page.add("projects", projects);
