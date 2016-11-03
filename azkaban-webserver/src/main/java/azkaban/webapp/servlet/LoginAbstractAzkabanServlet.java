@@ -93,8 +93,8 @@ public abstract class LoginAbstractAzkabanServlet extends
     if (hasParam(req, "logout")) {
       resp.sendRedirect(req.getContextPath());
       if (session != null) {
-        getApplication().getSessionCache()
-            .removeSession(session.getSessionId());
+        //getApplication().getSessionCache().removeSession(session.getSessionId());
+        getApplication().getSessionCodis().removeSession(session.getSessionId());
       }
       return;
     }
@@ -221,7 +221,8 @@ public abstract class LoginAbstractAzkabanServlet extends
       return null;
     }
 
-    Session session = getApplication().getSessionCache().getSession(sessionId);
+    //Session session = getApplication().getSessionCache().getSession(sessionId);
+    Session session = getApplication().getSessionCodis().getSession(sessionId);
     // Check if the IP's are equal. If not, we invalidate the sesson.
     if (session == null || !remoteIp.equals(session.getIp())) {
       return null;
@@ -372,7 +373,8 @@ public abstract class LoginAbstractAzkabanServlet extends
       Cookie cookie = new Cookie(SESSION_ID_NAME, session.getSessionId());
       cookie.setPath("/");
       resp.addCookie(cookie);
-      getApplication().getSessionCache().addSession(session);
+     // getApplication().getSessionCache().addSession(session);
+      getApplication().getSessionCodis().addSession(session);
       ret.put("status", "success");
       ret.put("session.id", session.getSessionId());
     } else {

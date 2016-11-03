@@ -16,27 +16,35 @@
 
 package azkaban.webapp;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.management.ManagementFactory;
-import java.lang.reflect.Constructor;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
-
-import javax.management.MBeanInfo;
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
-
+import azkaban.alert.Alerter;
+import azkaban.database.AzkabanDatabaseSetup;
+import azkaban.executor.ExecutorManager;
+import azkaban.executor.JdbcExecutorLoader;
+import azkaban.jmx.JmxExecutorManager;
+import azkaban.jmx.JmxJettyServer;
+import azkaban.jmx.JmxTriggerManager;
+import azkaban.project.JdbcProjectLoader;
+import azkaban.project.ProjectManager;
+import azkaban.scheduler.ScheduleLoader;
+import azkaban.scheduler.ScheduleManager;
+import azkaban.scheduler.TriggerBasedScheduleLoader;
+import azkaban.server.AzkabanServer;
+import azkaban.server.ServerConstants;
+import azkaban.server.session.SessionCache;
+import azkaban.server.session.SessionCodis;
+import azkaban.trigger.JdbcTriggerLoader;
+import azkaban.trigger.TriggerLoader;
+import azkaban.trigger.TriggerManager;
+import azkaban.trigger.TriggerManagerException;
+import azkaban.trigger.builtin.*;
+import azkaban.user.UserManager;
+import azkaban.user.XmlUserManager;
+import azkaban.utils.*;
+import azkaban.webapp.plugin.PluginRegistry;
+import azkaban.webapp.plugin.TriggerPlugin;
+import azkaban.webapp.plugin.ViewerPlugin;
+import azkaban.webapp.servlet.*;
+import com.linkedin.restli.server.RestliServlet;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.jmx.HierarchyDynamicMBean;
@@ -54,54 +62,16 @@ import org.mortbay.jetty.servlet.DefaultServlet;
 import org.mortbay.jetty.servlet.ServletHolder;
 import org.mortbay.thread.QueuedThreadPool;
 
-import azkaban.alert.Alerter;
-import azkaban.database.AzkabanDatabaseSetup;
-import azkaban.executor.ExecutorManager;
-import azkaban.executor.JdbcExecutorLoader;
-import azkaban.jmx.JmxExecutorManager;
-import azkaban.jmx.JmxJettyServer;
-import azkaban.jmx.JmxTriggerManager;
-import azkaban.project.JdbcProjectLoader;
-import azkaban.project.ProjectManager;
-import azkaban.scheduler.ScheduleLoader;
-import azkaban.scheduler.ScheduleManager;
-import azkaban.scheduler.TriggerBasedScheduleLoader;
-import azkaban.server.AzkabanServer;
-import azkaban.server.ServerConstants;
-import azkaban.server.session.SessionCache;
-import azkaban.trigger.JdbcTriggerLoader;
-import azkaban.trigger.TriggerLoader;
-import azkaban.trigger.TriggerManager;
-import azkaban.trigger.TriggerManagerException;
-import azkaban.trigger.builtin.BasicTimeChecker;
-import azkaban.trigger.builtin.CreateTriggerAction;
-import azkaban.trigger.builtin.ExecuteFlowAction;
-import azkaban.trigger.builtin.ExecutionChecker;
-import azkaban.trigger.builtin.KillExecutionAction;
-import azkaban.trigger.builtin.SlaAlertAction;
-import azkaban.trigger.builtin.SlaChecker;
-import azkaban.user.UserManager;
-import azkaban.user.XmlUserManager;
-import azkaban.utils.Emailer;
-import azkaban.utils.FileIOUtils;
-import azkaban.utils.Props;
-import azkaban.utils.PropsUtils;
-import azkaban.utils.Utils;
-import azkaban.webapp.plugin.PluginRegistry;
-import azkaban.webapp.plugin.TriggerPlugin;
-import azkaban.webapp.plugin.ViewerPlugin;
-import azkaban.webapp.servlet.AbstractAzkabanServlet;
-import azkaban.webapp.servlet.ExecutorServlet;
-import azkaban.webapp.servlet.HistoryServlet;
-import azkaban.webapp.servlet.IndexRedirectServlet;
-import azkaban.webapp.servlet.JMXHttpServlet;
-import azkaban.webapp.servlet.ProjectManagerServlet;
-import azkaban.webapp.servlet.ProjectServlet;
-import azkaban.webapp.servlet.ScheduleServlet;
-import azkaban.webapp.servlet.StatsServlet;
-import azkaban.webapp.servlet.TriggerManagerServlet;
-
-import com.linkedin.restli.server.RestliServlet;
+import javax.management.MBeanInfo;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import java.io.*;
+import java.lang.management.ManagementFactory;
+import java.lang.reflect.Constructor;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.*;
 
 /**
  * The Azkaban Jetty server class
@@ -162,6 +132,7 @@ public class AzkabanWebServer extends AzkabanServer {
 
   private Props props;
   private SessionCache sessionCache;
+  private SessionCodis sessionCodis;
   private File tempDir;
   private Map<String, TriggerPlugin> triggerPlugins;
 
@@ -190,6 +161,7 @@ public class AzkabanWebServer extends AzkabanServer {
         configureVelocityEngine(props
             .getBoolean(VELOCITY_DEV_MODE_PARAM, false));
     sessionCache = new SessionCache(props);
+    sessionCodis=new SessionCodis(props);
     userManager = loadUserManager(props);
 
     alerters = loadAlerters(props);
@@ -576,6 +548,14 @@ public class AzkabanWebServer extends AzkabanServer {
   }
 
   /**
+   * 获取SessionCodis对象
+   * @return
+   */
+  public SessionCodis getSessionCodis(){
+    return sessionCodis;
+  }
+
+  /**
    * Returns the velocity engine for pages to use.
    *
    * @return
@@ -793,6 +773,9 @@ public class AzkabanWebServer extends AzkabanServer {
     String viewerPluginDir =
         azkabanSettings.getString("viewer.plugin.dir", "plugins/viewer");
     loadViewerPlugins(root, viewerPluginDir, app.getVelocityEngine());
+
+    //向zookeeper注册节点
+    ElectLeader.zkStart(azkabanSettings);
 
     // triggerplugin
     String triggerPluginDir =
