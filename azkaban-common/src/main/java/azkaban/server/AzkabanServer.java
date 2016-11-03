@@ -16,21 +16,20 @@
 
 package azkaban.server;
 
+import azkaban.server.session.SessionCache;
+import azkaban.server.session.SessionCodis;
+import azkaban.user.UserManager;
+import azkaban.utils.Props;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import joptsimple.OptionSpec;
+import org.apache.log4j.Logger;
+import org.apache.velocity.app.VelocityEngine;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
-
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import joptsimple.OptionSpec;
-
-import org.apache.log4j.Logger;
-import org.apache.velocity.app.VelocityEngine;
-
-import azkaban.user.UserManager;
-import azkaban.utils.Props;
-import azkaban.server.session.SessionCache;
 
 public abstract class AzkabanServer {
   private static final Logger logger = Logger.getLogger(AzkabanServer.class);
@@ -145,5 +144,7 @@ public abstract class AzkabanServer {
   public abstract VelocityEngine getVelocityEngine();
 
   public abstract UserManager getUserManager();
+
+  public abstract SessionCodis getSessionCodis();
 
 }
