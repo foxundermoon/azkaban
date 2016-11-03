@@ -16,26 +16,20 @@
 
 package azkaban.trigger;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.PriorityBlockingQueue;
-
-import org.apache.log4j.Logger;
-
 import azkaban.event.Event;
+import azkaban.event.Event.Type;
 import azkaban.event.EventHandler;
 import azkaban.event.EventListener;
-import azkaban.event.Event.Type;
 import azkaban.executor.ExecutableFlow;
 import azkaban.executor.ExecutorManager;
 import azkaban.utils.Props;
+import azkaban.utils.Switch;
+import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.PriorityBlockingQueue;
 
 public class TriggerManager extends EventHandler implements
     TriggerManagerAdapter {
@@ -218,9 +212,14 @@ public class TriggerManager extends EventHandler implements
     }
 
     public void run() {
+
+
+
       while (!shutdown) {
+      if (Switch.isMaster){//如果当前应用是master,则执行
         synchronized (syncObj) {
           try {
+            logger.error("(TriggerScannerThread) Run the trigger manager thread !");
             lastRunnerThreadCheckTime = System.currentTimeMillis();
 
             scannerStage =
@@ -254,6 +253,13 @@ public class TriggerManager extends EventHandler implements
             logger.info("Interrupted. Probably to shut down.");
           }
         }
+      }else{
+        try {
+          this.sleep(1000);
+        } catch (InterruptedException e) {
+          logger.info("(TriggerScannerThread) thread sleep error");
+        }
+      }
       }
     }
 

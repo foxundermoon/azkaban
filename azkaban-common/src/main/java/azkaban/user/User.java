@@ -28,11 +28,19 @@ public class User {
   private Set<String> roles = new HashSet<String>();
   private Set<String> groups = new HashSet<String>();
   private UserPermissions userPermissions;
+  private String password;
 
   private HashMap<String, String> properties = new HashMap<String, String>();
 
   public User(String userid) {
     this.userid = userid;
+  }
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public String getUserId() {
