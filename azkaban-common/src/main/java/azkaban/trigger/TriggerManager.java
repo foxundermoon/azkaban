@@ -83,8 +83,15 @@ public class TriggerManager extends EventHandler implements
   }
 
   @Override
-  public void start() throws TriggerManagerException {
+  public void start() {
+    runnerThread.start();
+  }
 
+  /**
+   * 加载triggers
+   *
+   */
+  public void loadTriggers() {
     try {
       // expect loader to return valid triggers
       List<Trigger> triggers = triggerLoader.loadTriggers();
@@ -93,13 +100,10 @@ public class TriggerManager extends EventHandler implements
         triggerIdMap.put(t.getTriggerId(), t);
       }
     } catch (Exception e) {
-      e.printStackTrace();
-      throw new TriggerManagerException(e);
+      logger.error("(TriggerManager-loadTriggers) load triggers error,error="+e);
     }
 
-    runnerThread.start();
   }
-
   protected CheckerTypeLoader getCheckerLoader() {
     return checkerTypeLoader;
   }
@@ -255,7 +259,7 @@ public class TriggerManager extends EventHandler implements
         }
       }else{
         try {
-          this.sleep(1000);
+          sleep(1000);
         } catch (InterruptedException e) {
           logger.info("(TriggerScannerThread) thread sleep error");
         }

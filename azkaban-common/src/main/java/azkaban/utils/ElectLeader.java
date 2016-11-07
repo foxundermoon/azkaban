@@ -1,10 +1,14 @@
 package azkaban.utils;
 
+import azkaban.trigger.TriggerManager;
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -12,16 +16,17 @@ import java.util.Random;
  */
 public class ElectLeader implements Watcher {
     private static final Logger LOG = Logger.getLogger(ElectLeader.class);
-    private static final String AZKABAN_ZOOKEEPER_CONNECTION_ADDRESS="azkaban.zookeeper.connection.address";
-    private static final String AZKABAN_ZOOKEEPER_NODE_NAME="azkaban.zookeeper.node.name";    
-
+    private static final String AZKABAN_ZOOKEEPER_CONNECTION_ADDRESS="azkaban.zookeeper.address";
+    private static final String AZKABAN_ZOOKEEPER_NODE_NAME="azkaban.zookeeper.node.name";
+    private static final String AZKABAN_NODE_IP="azkaban.node.ip";
+    private static final String AZKABAN_CONNECTION_ZOOKEEPER_ERROR_EMAILS="azkaban.connection.zookeeper.error.emails";
+    private static final String AZKABAN_CONNECTION_ZOOKEEPER_MAX_TIME="azkaban.connection.zookeeper.max.time";
     private static final int SESSION_TIMEOUT = 5000;
-    private static  String connection_address = "192.168.10.85:2181";
+    private static  String connection_address = "192.168.10.84:2181";
     private static  String znode_name = "/azkaban";
     private Random random = new Random(System.currentTimeMillis());
     private ZooKeeper zk;
-    private String serverId = Integer.toHexString(random.nextInt());
-
+    private static String serverId = "192.168.10.85";
     private volatile boolean connected = false;
     private volatile boolean expired = false;
     enum MasterStates {RUNNING, ELECTED, NOTELECTED};
@@ -29,7 +34,10 @@ public class ElectLeader implements Watcher {
     MasterStates getState() {
         return state;
     }
-
+    private static TriggerManager triggerManager;
+    private static AbstractMailer mailer;
+    private static boolean isStop=false;
+    private static List<String> emailList=new ArrayList<String>();
     public void startZk() throws IOException {
         zk = new ZooKeeper(connection_address, SESSION_TIMEOUT, this);
     }
@@ -68,6 +76,7 @@ public class ElectLeader implements Watcher {
                     System.out.println("---------I'm the leader--------- ");
                     LOG.info("(ElectLeader) I'm the leader");
                     state = MasterStates.ELECTED;
+                    ElectLeader.triggerManager.loadTriggers();//加载triggers
                     Switch.isMaster=true;//开启开关，执行TriggerManager的TriggerScannerThread线程
                     break;
                 case NODEEXISTS:
@@ -193,41 +202,85 @@ public class ElectLeader implements Watcher {
             }
         }
     }
+
+    /**
+     * 发送告警邮件
+     * @param subject
+     * @param mimetype
+     * @param message
+     * @param emailList
+     * @throws Exception
+     */
+    public void sendEmail(String subject,String mimetype,String message, List<String> emailList) {
+
+        EmailMessage email =
+                mailer.prepareEmailMessage(subject, mimetype, emailList);
+        email.setBody(message);
+        email.setTLS("false");
+        try {
+            email.sendEmail();
+        } catch (MessagingException e) {
+            LOG.error("(ElectLeader) send email error",e);
+        }
+    }
     /**
      * 向zookeeper注册节点
      */
-    public static void zkStart( Props props){
+    public static void zkStart( Props props,TriggerManager triggerManager){
         LOG.info("-------------------zkStart----------------------");
         System.out.println("-------------------zkStart----------------------");
+
+        ElectLeader.triggerManager=triggerManager;
         connection_address=props.getString(AZKABAN_ZOOKEEPER_CONNECTION_ADDRESS);
         znode_name=props.getString(AZKABAN_ZOOKEEPER_NODE_NAME);
+        serverId=props.getString(AZKABAN_NODE_IP);
+        final long maxTime=props.getLong(AZKABAN_CONNECTION_ZOOKEEPER_MAX_TIME);//连接时长
+        mailer = new AbstractMailer(props);//初始化mailer对象
+        String[] emails=props.getString(AZKABAN_CONNECTION_ZOOKEEPER_ERROR_EMAILS).split(",");//连接zk异常报警邮件
+        for(String email:emails){
+            emailList.add(email);
+        }
         Thread enrollToZookeeper = new Thread(new Runnable() {
             @Override
             public void run() {
+                ElectLeader electLeader = new ElectLeader( );
                 while(true){
-                    ElectLeader electLeader = new ElectLeader( );
-
                     try {
                         electLeader.startZk();
                     } catch (IOException e) {
                         LOG.error("(ElectLeader) start zookeeper error",e);
                     }
+                    long firstTime=System.currentTimeMillis();
                     while (!electLeader.isConnected()) {
+                        long currentTime=System.currentTimeMillis();
+                        long longTime=currentTime-firstTime;
+                        if(longTime>maxTime && !isStop){
+                            System.out.println("---------------connect zookeeper exception，send mail--------------");
+                            LOG.error("(ElectLeader) Azkaban connect zookeeper error");
+                            electLeader.sendEmail("Azkaban connect zookeeper exception","text/html","<h2 style=\"color:#FF0000\">"+serverId+" azkaban connect zookeeper exception!</h2>",emailList);
+                            isStop=true;
+                            break;
+                        }
                         try {
                             Thread.sleep(100);
                         } catch (InterruptedException e) {
                             LOG.error("(ElectLeader) thread sleep error",e);
                         }
                     }
-
-                    electLeader.enroll();
-                    while (!electLeader.isExpired()) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            LOG.error("(ElectLeader) thread sleep error",e);
+                    if(electLeader.isConnected()){
+                        isStop=false;
+                    }
+                    if(!isStop){
+                        electLeader.enroll();
+                        while (!electLeader.isExpired()) {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                LOG.error("(ElectLeader) thread sleep error",e);
+                            }
                         }
                     }
+
                     electLeader.stopZk();
                     try {
                         Thread.sleep(1000);

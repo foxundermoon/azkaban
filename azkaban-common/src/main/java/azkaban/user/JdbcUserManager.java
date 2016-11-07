@@ -10,11 +10,11 @@ import java.util.Set;
 
 /**
  * @author lcs
- * @class SQLUserManager
+ * @class JdbcUserManager
  * @date 2016/9/30.
  * @describe  从mysql中读取用户相关数据
  */
-public class JdbcUserManager implements UserManager  {
+public class JdbcUserManager implements UserManager {
     private static final Logger logger = Logger.getLogger(JdbcUserManager.class);
     private UserInfoLoader userInfoLoader=null;
     private HashMap<String, User> users;
@@ -24,23 +24,26 @@ public class JdbcUserManager implements UserManager  {
     private HashMap<String, Set<String>> proxyUserMap;
     public static final String LOAD_DATA_SLEEEP_TIME = "user.manager.load.data.sleep.time";
 
+
     public JdbcUserManager(Props props) {
         this.userInfoLoader=new JdbcUserInfoLoader(props);
         final long sleepTime=props.getLong(LOAD_DATA_SLEEEP_TIME);
-        //每五分钟重新加载一遍数据
+        //每隔LOAD_DATA_SLEEEP_TIME时间去mysql中加载用户数据到map中
         Thread loadUserDataThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
                     try {
                         initData();//初始化数据
+                        Thread.sleep(sleepTime);
                     } catch (Exception e) {
-                        throw new RuntimeException("load user data error", e);
+                        logger.error("(JdbcUserManager)load user data error",e);
                     } finally {
                         try {
                             Thread.sleep(sleepTime);
                         } catch (Exception e) {
-                            throw new RuntimeException("sleep error", e);
+                            logger.error("(JdbcUserManager)thread sleep error");
+
                         }
                     }
                 }
@@ -54,7 +57,6 @@ public class JdbcUserManager implements UserManager  {
      * 从mysql中初始化数据到内存
      */
     public void initData(){
-
         HashMap<String, User> users = new HashMap<String, User>();
         HashMap<String, String> userPassword = new HashMap<String, String>();
         HashMap<String, Role> roles = new HashMap<String, Role>();
@@ -118,6 +120,7 @@ public class JdbcUserManager implements UserManager  {
             this.proxyUserMap = proxyUserMap;
             this.groupRoles = groupRoles;
         }
+        logger.error("(JdbcUserManager-initData) users.seize="+users.size()+",userPassword.seize="+userPassword.size()+",roles.seize="+roles.size()+",proxyUserMap.seize="+proxyUserMap.size()+",groupRoles.seize="+groupRoles.size());
     }
 
     /**
@@ -135,8 +138,7 @@ public class JdbcUserManager implements UserManager  {
         for(User userObj:userList){
             user=userObj;
             userPassword.put(user.getUserId(),user.getPassword());//密码
-            users.put(user.getUserId(),user);//用户
-            if(userGroupList!=null){
+            if(userRoleList!=null){
                 for(UserRole userRole:userRoleList){
                     if(user.getUserId().equals(userRole.getUserName())){
                         user.addRole(userRole.getRoleName());//用户-角色
@@ -162,6 +164,7 @@ public class JdbcUserManager implements UserManager  {
                     }
                 }
             }
+            users.put(user.getUserId(),user);//用户
         }
     }
 
@@ -173,10 +176,8 @@ public class JdbcUserManager implements UserManager  {
         if(roleList==null){
             throw new RuntimeException("Error loading role. The roleList is null.");
         }
-        Permission perm = new Permission();
         for(Role role:roleList){
             String roleName=role.getName();
-           // Role role1 = new Role(roleName, role.getPermission());
             roles.put(roleName, role);
         }
     }
