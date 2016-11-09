@@ -84,6 +84,7 @@ public class TriggerManager extends EventHandler implements
 
   @Override
   public void start() {
+    //loadTriggers();
     runnerThread.start();
   }
 
@@ -103,6 +104,15 @@ public class TriggerManager extends EventHandler implements
       logger.error("(TriggerManager-loadTriggers) load triggers error,error="+e);
     }
 
+  }
+
+  /**
+   * 删除存在map和队列中的triggers
+   * @return
+   */
+  public void deleteTriggers(){
+    triggerIdMap.clear();
+    runnerThread.clearTriggers();
   }
   protected CheckerTypeLoader getCheckerLoader() {
     return checkerTypeLoader;
@@ -215,6 +225,12 @@ public class TriggerManager extends EventHandler implements
       triggers.remove(t);
     }
 
+    /**
+     * 清除triggers
+     */
+    public void clearTriggers(){
+      triggers.clear();
+    }
     public void run() {
 
 
