@@ -160,9 +160,9 @@ public class AzkabanWebServer extends AzkabanServer {
     velocityEngine =
         configureVelocityEngine(props
             .getBoolean(VELOCITY_DEV_MODE_PARAM, false));
-    sessionCache = new SessionCache(props);
-    sessionCodis=new SessionCodis(props);
     userManager = loadUserManager(props);
+    sessionCache = new SessionCache(props);
+    sessionCodis=new SessionCodis(props,userManager);
 
     alerters = loadAlerters(props);
 
@@ -775,7 +775,7 @@ public class AzkabanWebServer extends AzkabanServer {
     loadViewerPlugins(root, viewerPluginDir, app.getVelocityEngine());
 
     //向zookeeper注册节点
-    ElectLeader.zkStart(azkabanSettings);
+    ElectLeader.zkStart(azkabanSettings,app.getTriggerManager());
 
     // triggerplugin
     String triggerPluginDir =
