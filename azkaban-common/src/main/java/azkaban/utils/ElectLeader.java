@@ -51,7 +51,7 @@ public class ElectLeader implements Watcher {
             try {
                 zk.close();
             } catch (InterruptedException e) {
-                logger.error("(ElectLeader)Interrupted while closing ZooKeeper session.", e);
+                logger.error("Interrupted while closing ZooKeeper session.", e);
             }
         }
     }
@@ -95,20 +95,20 @@ public class ElectLeader implements Watcher {
                     //如果是master，则将zookeeper上的临时目录删除
                     if(is_master_node){
                         try {
-                            logger.error("(ElectLeader) delete zookeeper path");
+                            logger.error(" delete zookeeper path");
                             zk.delete(znode_name,0);
                         } catch (Exception e) {
-                            logger.error("(ElectLeader) delete zookeeper path error",e);
+                            logger.error(" delete zookeeper path error",e);
                         }
                     }
                     break;
                 default:
                     state = MasterStates.NOTELECTED;
                     TriggerManager.isMaster = false;//关闭开关，执行TriggerManager的TriggerScannerThread线程
-                    logger.error("(ElectLeader)Something went wrong when running for master.",
+                    logger.error("Something went wrong when running for master.",
                             KeeperException.create(KeeperException.Code.get(rc), path));
             }
-            logger.info("(ElectLeader)I'm " + (state == MasterStates.ELECTED ? "" : "not ") + "the leader " + serverId);
+            logger.info("I'm " + (state == MasterStates.ELECTED ? "" : "not ") + "the leader " + serverId);
         }
     };
 
@@ -136,7 +136,7 @@ public class ElectLeader implements Watcher {
                     }
                     break;
                 default:
-                    logger.error("(ElectLeader)Error when reading data.", KeeperException.create(KeeperException.Code.get(rc), path));
+                    logger.error("Error when reading data.", KeeperException.create(KeeperException.Code.get(rc), path));
             }
 
         }
@@ -169,7 +169,7 @@ public class ElectLeader implements Watcher {
                 case NONODE:
                     state = MasterStates.RUNNING;
                     enroll();
-                    logger.error("(ElectLeader)It sounds like the previous master is gone, " +
+                    logger.error("It sounds like the previous master is gone, " +
                             "so let's run for master again.");
                     break;
                 default:
@@ -204,26 +204,27 @@ public class ElectLeader implements Watcher {
 
     @Override
     public void process(WatchedEvent e) {
-        logger.info("(ElectLeader) Processing event: " + e.toString());
+        logger.info(" Processing event: " + e.toString());
 
         if (e.getType() == Event.EventType.None) {
             switch (e.getState()) {
                 case SyncConnected:
                     connected = true;
+                    break;
                 case Disconnected:
                     connected = false;
-                    logger.error("(ElectLeader) Azkaban connect zookeeper error");
+                    logger.error(" Azkaban connect zookeeper error");
                     sendEmail("Azkaban connect zookeeper exception", "text/html", "<h2 style=\"color:#FF0000\">" + serverId + " azkaban connect zookeeper exception!</h2>", emailList);
                     break;
                 case Expired:
                     expired = true;
                     connected = false;
-                    logger.error("(ElectLeader) Session expiration");
+                    logger.error(" Session expiration");
                 default:
                     break;
             }
-        }else if(e.getType() == Event.EventType.NodeDeleted){//临时目录被删除，设置expired = true，并停止调度任务
-            logger.error("(ElectLeader) the zookeeper path has deleted");
+        }else if(e.getType() == Event.EventType.NodeDeleted){
+            logger.error(" the zookeeper path has deleted");
             expired = true;
             connected = false;
             TriggerManager.isMaster = false;//关闭开关，执行TriggerManager的TriggerScannerThread线程
@@ -249,7 +250,7 @@ public class ElectLeader implements Watcher {
         try {
             email.sendEmail();
         } catch (MessagingException e) {
-            logger.error("(ElectLeader) send email error", e);
+            logger.error(" send email error", e);
         }
     }
 
@@ -257,7 +258,7 @@ public class ElectLeader implements Watcher {
      * 向zookeeper注册节点
      */
     public static void zkStart(Props props, TriggerManager triggerManager) {
-        logger.info("(ElectLeader) ---zkStart---");
+        logger.info("---zkStart---");
         ElectLeader.triggerManager = triggerManager;
         connection_address = props.getString(AZKABAN_ZOOKEEPER_CONNECTION_ADDRESS);
         znode_name = props.getString(AZKABAN_ZOOKEEPER_NODE_NAME);
@@ -278,13 +279,13 @@ public class ElectLeader implements Watcher {
                     try {
                         electLeader.startZk();
                     } catch (IOException e) {
-                        logger.error("(ElectLeader) start zookeeper error", e);
+                        logger.error(" start zookeeper error", e);
                     }
                     while (!electLeader.isConnected()) {
                         try {
                             Thread.sleep(100);
                         } catch (InterruptedException e) {
-                            logger.error("(ElectLeader) thread sleep error", e);
+                            logger.error(" thread sleep error", e);
                         }
                     }
 
@@ -293,7 +294,7 @@ public class ElectLeader implements Watcher {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
-                            logger.error("(ElectLeader) thread sleep error", e);
+                            logger.error(" thread sleep error", e);
                         }
                     }
 
@@ -301,7 +302,7 @@ public class ElectLeader implements Watcher {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
-                        logger.error("(ElectLeader) thread sleep error", e);
+                        logger.error(" thread sleep error", e);
                     }
                 }
             }
@@ -318,7 +319,7 @@ public class ElectLeader implements Watcher {
         @Override
         public void processResult(int rc, String path, Object ctx, byte[] data, Stat stat) {
             if (!serverId.equals(new String(data))) {
-                logger.error("(ElectLeader) the zookeeper path="+znode_name+"，data has changed ,data="+new String(data));
+                logger.error(" the zookeeper path="+znode_name+"，data has changed ,data="+new String(data));
             }
 
         }

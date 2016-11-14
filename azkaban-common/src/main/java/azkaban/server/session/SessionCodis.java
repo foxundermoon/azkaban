@@ -75,7 +75,7 @@ public class SessionCodis {
      * @param session
      */
     public void addSession(Session session) {
-        logger.error("(SessionCodis-addSession) username= " + session.getUser().getUserId());
+        logger.error(" addSession method ,username= " + session.getUser().getUserId());
         JedisResourcePool jedisPool = getPool();
         Jedis jedis = jedisPool.getResource();
         jedis.hset(session.getSessionId(), "username", session.getUser().getUserId());
@@ -97,16 +97,16 @@ public class SessionCodis {
         String username = jedis.hget(sessionId, "username");
         String password = jedis.hget(sessionId, "password");
         String ip = jedis.hget(sessionId, "ip");
-        logger.info("(SessionCodis-getSession) sessionId= " + sessionId + ",username=" + username + ",ip=" + ip);
+        logger.info(" getSession method ,sessionId= " + sessionId + ",username=" + username + ",ip=" + ip);
         if (StringUtils.isBlank(sessionId) || StringUtils.isBlank(password) || StringUtils.isBlank(ip)) {
-            logger.error("(SessionCodis-getSession) param  error,sessionId="+sessionId+",password="+password+",ip"+ip);
+            logger.error(" getSession method , param  error,sessionId="+sessionId+",password="+password+",ip"+ip);
             return null;
         }
         Session session = null;
         try {
             session = createSession(sessionId, username, password, ip);
         } catch (Exception e) {
-            logger.error("(SessionCodis-getSession) get session object error",e);
+            logger.error(" getSession method , get session object error",e);
         }
         jedis.close();
         return session;
@@ -118,7 +118,7 @@ public class SessionCodis {
      * @param sessionId
      */
     public void removeSession(String sessionId) {
-        logger.error("(SessionCodis-removeSession) removeSession= " + sessionId);
+        logger.error(" removeSession method , removeSession= " + sessionId);
         JedisResourcePool jedisPool = getPool();
         Jedis jedis = jedisPool.getResource();
         if (jedis.exists(sessionId)) {

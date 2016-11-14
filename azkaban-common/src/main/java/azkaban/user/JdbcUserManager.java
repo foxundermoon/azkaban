@@ -36,12 +36,12 @@ public class JdbcUserManager implements UserManager {
                     try {
                         initData();//初始化数据
                     } catch (Exception e) {
-                        logger.error("(JdbcUserManager)load user data error", e);
+                        logger.error(" load user data error", e);
                     } finally {
                         try {
                             Thread.sleep(sleepTime);
                         } catch (Exception e) {
-                            logger.error("(JdbcUserManager)thread sleep error");
+                            logger.error(" thread sleep error");
                         }
                     }
                 }
@@ -118,7 +118,7 @@ public class JdbcUserManager implements UserManager {
             this.proxyUserMap = proxyUserMap;
             this.groupRoles = groupRoles;
         }
-        logger.error("(JdbcUserManager-initData) users.seize=" + users.size() + ",userPassword.seize=" + userPassword.size() + ",roles.seize=" + roles.size() + ",proxyUserMap.seize=" + proxyUserMap.size() + ",groupRoles.seize=" + groupRoles.size());
+        logger.error(" initData method ,users.seize=" + users.size() + ",userPassword.seize=" + userPassword.size() + ",roles.seize=" + roles.size() + ",proxyUserMap.seize=" + proxyUserMap.size() + ",groupRoles.seize=" + groupRoles.size());
     }
 
     /**

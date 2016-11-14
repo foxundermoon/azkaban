@@ -243,7 +243,7 @@ public class TriggerManager extends EventHandler implements
                 if (isMaster) {//如果当前应用是master,则执行
                     synchronized (syncObj) {
                         try {
-                            logger.error("(TriggerScannerThread) Run the trigger manager thread !");
+                            logger.error(" Run the trigger manager thread !");
                             lastRunnerThreadCheckTime = System.currentTimeMillis();
 
                             scannerStage =
@@ -281,7 +281,7 @@ public class TriggerManager extends EventHandler implements
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
-                        logger.info("(TriggerScannerThread) thread sleep error");
+                        logger.info(" thread sleep error");
                     }
                 }
             }
