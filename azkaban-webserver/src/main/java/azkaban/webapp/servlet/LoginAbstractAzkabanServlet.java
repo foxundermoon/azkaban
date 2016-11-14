@@ -19,6 +19,7 @@ package azkaban.webapp.servlet;
 import azkaban.project.Project;
 import azkaban.server.session.Session;
 import azkaban.user.*;
+import azkaban.utils.MD5FileUtil;
 import azkaban.utils.StringUtils;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
@@ -332,7 +333,7 @@ public abstract class LoginAbstractAzkabanServlet extends
   private Session createSession(String username, String password, String ip)
       throws UserManagerException, ServletException {
     UserManager manager = getApplication().getUserManager();
-    User user = manager.getUser(username, password);
+    User user = manager.getUser(username, MD5FileUtil.getMD5String(password));
 
     String randomUID = UUID.randomUUID().toString();
     Session session = new Session(randomUID, user, ip);
