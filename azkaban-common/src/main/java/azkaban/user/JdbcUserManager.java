@@ -12,11 +12,11 @@ import java.util.Set;
  * @author lcs
  * @class JdbcUserManager
  * @date 2016/9/30.
- * @describe  从mysql中读取用户相关数据
+ * @describe 从mysql中读取用户相关数据
  */
 public class JdbcUserManager implements UserManager {
     private static final Logger logger = Logger.getLogger(JdbcUserManager.class);
-    private UserInfoLoader userInfoLoader=null;
+    private UserInfoLoader userInfoLoader = null;
     private HashMap<String, User> users;
     private HashMap<String, String> userPassword;
     private HashMap<String, Role> roles;
@@ -26,8 +26,8 @@ public class JdbcUserManager implements UserManager {
 
 
     public JdbcUserManager(Props props) {
-        this.userInfoLoader=new JdbcUserInfoLoader(props);
-        final long sleepTime=props.getLong(LOAD_DATA_SLEEEP_TIME);
+        this.userInfoLoader = new JdbcUserInfoLoader(props);
+        final long sleepTime = props.getLong(LOAD_DATA_SLEEEP_TIME);
         //每隔LOAD_DATA_SLEEEP_TIME时间去mysql中加载用户数据到map中
         Thread loadUserDataThread = new Thread(new Runnable() {
             @Override
@@ -35,15 +35,13 @@ public class JdbcUserManager implements UserManager {
                 while (true) {
                     try {
                         initData();//初始化数据
-                        Thread.sleep(sleepTime);
                     } catch (Exception e) {
-                        logger.error("(JdbcUserManager)load user data error",e);
+                        logger.error("(JdbcUserManager)load user data error", e);
                     } finally {
                         try {
                             Thread.sleep(sleepTime);
                         } catch (Exception e) {
                             logger.error("(JdbcUserManager)thread sleep error");
-
                         }
                     }
                 }
@@ -56,7 +54,7 @@ public class JdbcUserManager implements UserManager {
     /**
      * 从mysql中初始化数据到内存
      */
-    public void initData(){
+    public void initData() {
         HashMap<String, User> users = new HashMap<String, User>();
         HashMap<String, String> userPassword = new HashMap<String, String>();
         HashMap<String, Role> roles = new HashMap<String, Role>();
@@ -65,52 +63,52 @@ public class JdbcUserManager implements UserManager {
         HashMap<String, Set<String>> proxyUserMap =
                 new HashMap<String, Set<String>>();
 
-        List<User> userList=null;
-        List<Role> roleList=null;
-        List<Group> groupList=null;
-        List<UserRole> userRoleList=null;
-        List<UserGroup> userGroupList=null;
-        List<UserProxy> userProxyList=null;
-        List<GroupRole> groupRoleList=null;
+        List<User> userList = null;
+        List<Role> roleList = null;
+        List<Group> groupList = null;
+        List<UserRole> userRoleList = null;
+        List<UserGroup> userGroupList = null;
+        List<UserProxy> userProxyList = null;
+        List<GroupRole> groupRoleList = null;
         try {
-            userList=userInfoLoader.fetchAllUser();
+            userList = userInfoLoader.fetchAllUser();
         } catch (UserManagerException e) {
             throw new RuntimeException("Could not load users from store.", e);
         }
         try {
-            roleList=userInfoLoader.fetchAllRole();
+            roleList = userInfoLoader.fetchAllRole();
         } catch (UserManagerException e) {
             throw new RuntimeException("Could not load roles from store.", e);
         }
         try {
-            groupList=userInfoLoader.fetchAllGroup();
+            groupList = userInfoLoader.fetchAllGroup();
         } catch (UserManagerException e) {
             throw new RuntimeException("Could not load groups from store.", e);
         }
         try {
-            userRoleList=userInfoLoader.fetchAllUserRole();
+            userRoleList = userInfoLoader.fetchAllUserRole();
         } catch (UserManagerException e) {
             throw new RuntimeException("Could not load user roles from store.", e);
         }
         try {
-            userGroupList=userInfoLoader.fetchAllUserGroup();
+            userGroupList = userInfoLoader.fetchAllUserGroup();
         } catch (UserManagerException e) {
             throw new RuntimeException("Could not load user groups from store.", e);
         }
         try {
-            userProxyList=userInfoLoader.fetchAllUserProxy();
+            userProxyList = userInfoLoader.fetchAllUserProxy();
         } catch (UserManagerException e) {
             throw new RuntimeException("Could not load user proxys from store.", e);
         }
         try {
-            groupRoleList=userInfoLoader.fetchAllGroupRole();
+            groupRoleList = userInfoLoader.fetchAllGroupRole();
         } catch (UserManagerException e) {
             throw new RuntimeException("Could not load group roles from store.", e);
         }
         //将数据加载到map中
         loadUserData(userList, userRoleList, userGroupList, userProxyList, users, userPassword, proxyUserMap);
-        loadRoleData(roleList,roles);
-        loadGroupData(groupList,groupRoleList,groupRoles);
+        loadRoleData(roleList, roles);
+        loadGroupData(groupList, groupRoleList, groupRoles);
 
         // Synchronize the swap. Similarly, the gets are synchronized to this.
         synchronized (this) {
@@ -120,41 +118,42 @@ public class JdbcUserManager implements UserManager {
             this.proxyUserMap = proxyUserMap;
             this.groupRoles = groupRoles;
         }
-        logger.error("(JdbcUserManager-initData) users.seize="+users.size()+",userPassword.seize="+userPassword.size()+",roles.seize="+roles.size()+",proxyUserMap.seize="+proxyUserMap.size()+",groupRoles.seize="+groupRoles.size());
+        logger.error("(JdbcUserManager-initData) users.seize=" + users.size() + ",userPassword.seize=" + userPassword.size() + ",roles.seize=" + roles.size() + ",proxyUserMap.seize=" + proxyUserMap.size() + ",groupRoles.seize=" + groupRoles.size());
     }
 
     /**
      * 加载用户信息
+     *
      * @param users
      * @param userPassword
      * @param proxyUserMap
      */
-    public void loadUserData(List<User> userList, List<UserRole> userRoleList,List<UserGroup> userGroupList, List<UserProxy> userProxyList,
-                             HashMap<String, User> users, HashMap<String, String> userPassword, HashMap<String, Set<String>> proxyUserMap){
-        if(userList==null){
+    public void loadUserData(List<User> userList, List<UserRole> userRoleList, List<UserGroup> userGroupList, List<UserProxy> userProxyList,
+                             HashMap<String, User> users, HashMap<String, String> userPassword, HashMap<String, Set<String>> proxyUserMap) {
+        if (userList == null) {
             throw new RuntimeException("Error loading user. The userList is null.");
         }
-        User user=null;
-        for(User userObj:userList){
-            user=userObj;
-            userPassword.put(user.getUserId(),user.getPassword());//密码
-            if(userRoleList!=null){
-                for(UserRole userRole:userRoleList){
-                    if(user.getUserId().equals(userRole.getUserName())){
+        User user = null;
+        for (User userObj : userList) {
+            user = userObj;
+            userPassword.put(user.getUserId(), user.getPassword());//密码
+            if (userRoleList != null) {
+                for (UserRole userRole : userRoleList) {
+                    if (user.getUserId().equals(userRole.getUserName())) {
                         user.addRole(userRole.getRoleName());//用户-角色
                     }
                 }
             }
-            if(userGroupList!=null){
-                for(UserGroup userGroup:userGroupList){
-                    if(user.getUserId().equals(userGroup.getUserName())){
+            if (userGroupList != null) {
+                for (UserGroup userGroup : userGroupList) {
+                    if (user.getUserId().equals(userGroup.getUserName())) {
                         user.addGroup(userGroup.getGroupName());//用户-组
                     }
                 }
             }
-            if(userProxyList!=null){
-                for(UserProxy userProxy:userProxyList){
-                    if(user.getUserId().equals(userProxy.getUserName())){
+            if (userProxyList != null) {
+                for (UserProxy userProxy : userProxyList) {
+                    if (user.getUserId().equals(userProxy.getUserName())) {
                         Set<String> proxySet = proxyUserMap.get(user.getUserId());
                         if (proxySet == null) {
                             proxySet = new HashSet<String>();
@@ -164,45 +163,50 @@ public class JdbcUserManager implements UserManager {
                     }
                 }
             }
-            users.put(user.getUserId(),user);//用户
+            users.put(user.getUserId(), user);//用户
         }
     }
 
     /**
      * 加载角色信息
+     *
      * @param roles
      */
-    public void loadRoleData(List<Role> roleList,HashMap<String, Role> roles){
-        if(roleList==null){
+    public void loadRoleData(List<Role> roleList, HashMap<String, Role> roles) {
+        if (roleList == null) {
             throw new RuntimeException("Error loading role. The roleList is null.");
         }
-        for(Role role:roleList){
-            String roleName=role.getName();
+        for (Role role : roleList) {
+            String roleName = role.getName();
             roles.put(roleName, role);
         }
     }
 
     /**
      * 加载组-角色信息
+     *
      * @param groupRoles
      */
-    public void loadGroupData(List<Group> groupList,List<GroupRole> groupRoleList,HashMap<String, Set<String>> groupRoles){
-        if(groupRoleList==null){
+    public void loadGroupData(List<Group> groupList, List<GroupRole> groupRoleList, HashMap<String, Set<String>> groupRoles) {
+        if (groupRoleList == null) {
             throw new RuntimeException("Error loading groupRole. The groupRoleList is null.");
         }
 
-        for(Group group:groupList){
-            String groupName=group.getGroupName();
+        for (Group group : groupList) {
+            String groupName = group.getGroupName();
             Set<String> roleSet = new HashSet<String>();
-            for(GroupRole groupRole:groupRoleList){
-                if(groupName.equals(groupRole.getGroupName())){
+            for (GroupRole groupRole : groupRoleList) {
+                if (groupName.equals(groupRole.getGroupName())) {
                     roleSet.add(groupRole.getRoleName());
                 }
             }
-            groupRoles.put(groupName,roleSet);
+            groupRoles.put(groupName, roleSet);
         }
 
-    };
+    }
+
+    ;
+
     @Override
     public User getUser(String username, String password) throws UserManagerException {
         if (username == null || username.trim().isEmpty()) {
@@ -248,6 +252,7 @@ public class JdbcUserManager implements UserManager {
         });
         return user;
     }
+
     private void resolveGroupRoles(User user) {
         for (String group : user.getGroups()) {
             Set<String> groupRoleSet = groupRoles.get(group);
@@ -258,6 +263,7 @@ public class JdbcUserManager implements UserManager {
             }
         }
     }
+
     @Override
     public boolean validateUser(String username) {
         return users.containsKey(username);
