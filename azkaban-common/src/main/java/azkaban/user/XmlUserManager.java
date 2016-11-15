@@ -16,27 +16,22 @@
 
 package azkaban.user;
 
+import azkaban.utils.Props;
+import org.apache.log4j.Logger;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.log4j.Logger;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import org.xml.sax.SAXException;
-
-import azkaban.user.User.UserPermissions;
-import azkaban.utils.Props;
 
 /**
  * Xml implementation of the UserManager. Looks for the property
@@ -250,60 +245,62 @@ public class XmlUserManager implements UserManager {
   @Override
   public User getUser(String username, String password)
       throws UserManagerException {
-    if (username == null || username.trim().isEmpty()) {
-      throw new UserManagerException("Username is empty.");
-    } else if (password == null || password.trim().isEmpty()) {
-      throw new UserManagerException("Password is empty.");
-    }
-
-    // Minimize the synchronization of the get. Shouldn't matter if it
-    // doesn't exist.
-    String foundPassword = null;
-    User user = null;
-    synchronized (this) {
-      foundPassword = userPassword.get(username);
-      if (foundPassword != null) {
-        user = users.get(username);
-      }
-    }
-
-    if (foundPassword == null || !foundPassword.equals(password)) {
-      throw new UserManagerException("Username/Password not found.");
-    }
-    // Once it gets to this point, no exception has been thrown. User
-    // shoudn't be
-    // null, but adding this check for if user and user/password hash tables
-    // go
-    // out of sync.
-    if (user == null) {
-      throw new UserManagerException("Internal error: User not found.");
-    }
-
-    // Add all the roles the group has to the user
-    resolveGroupRoles(user);
-    user.setPermissions(new UserPermissions() {
-      @Override
-      public boolean hasPermission(String permission) {
-        return true;
-      }
-
-      @Override
-      public void addPermission(String permission) {
-      }
-    });
-    return user;
+    return UserUtils.getInstance().getUser(groupRoles, users, userPassword, username, password);
+//    if (username == null || username.trim().isEmpty()) {
+//      throw new UserManagerException("Username is empty.");
+//    } else if (password == null || password.trim().isEmpty()) {
+//      throw new UserManagerException("Password is empty.");
+//    }
+//
+//    // Minimize the synchronization of the get. Shouldn't matter if it
+//    // doesn't exist.
+//    String foundPassword = null;
+//    User user = null;
+//    synchronized (this) {
+//      foundPassword = userPassword.get(username);
+//      if (foundPassword != null) {
+//        user = users.get(username);
+//      }
+//    }
+//
+//    if (foundPassword == null || !foundPassword.equals(password)) {
+//      throw new UserManagerException("Username/Password not found.");
+//    }
+//    // Once it gets to this point, no exception has been thrown. User
+//    // shoudn't be
+//    // null, but adding this check for if user and user/password hash tables
+//    // go
+//    // out of sync.
+//    if (user == null) {
+//      throw new UserManagerException("Internal error: User not found.");
+//    }
+//
+//    // Add all the roles the group has to the user
+//    resolveGroupRoles(user);
+//    user.setPermissions(new UserPermissions() {
+//      @Override
+//      public boolean hasPermission(String permission) {
+//        return true;
+//      }
+//
+//      @Override
+//      public void addPermission(String permission) {
+//      }
+//    });
+//    return user;
   }
 
-  private void resolveGroupRoles(User user) {
-    for (String group : user.getGroups()) {
-      Set<String> groupRoleSet = groupRoles.get(group);
-      if (groupRoleSet != null) {
-        for (String role : groupRoleSet) {
-          user.addRole(role);
-        }
-      }
-    }
-  }
+//  private void resolveGroupRoles(User user) {
+//    UserUtils.getInstance().resolveGroupRoles(groupRoles, user);
+//    for (String group : user.getGroups()) {
+//      Set<String> groupRoleSet = groupRoles.get(group);
+//      if (groupRoleSet != null) {
+//        for (String role : groupRoleSet) {
+//          user.addRole(role);
+//        }
+//      }
+//    }
+//  }
 
   private void parseGroupRoleTag(Node node,
       HashMap<String, Set<String>> groupRoles) {
