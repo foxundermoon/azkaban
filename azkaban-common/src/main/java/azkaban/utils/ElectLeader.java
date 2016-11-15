@@ -126,6 +126,7 @@ public class ElectLeader implements Watcher {
                 case NONODE:
                     // 节点未创建，再次注册
                     enroll();
+                    logger.error("create zk node success.");
                     return;
                 case OK:
                     if (serverId.equals(new String(data))) {
