@@ -16,6 +16,17 @@
 
 package azkaban.project;
 
+import azkaban.flow.Flow;
+import azkaban.project.ProjectLogEvent.EventType;
+import azkaban.project.validator.*;
+import azkaban.user.Permission;
+import azkaban.user.Permission.Type;
+import azkaban.user.User;
+import azkaban.utils.Props;
+import azkaban.utils.Utils;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,24 +38,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import java.util.zip.ZipFile;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-
-import azkaban.flow.Flow;
-import azkaban.project.DirectoryFlowLoader;
-import azkaban.project.ProjectLogEvent.EventType;
-import azkaban.project.ProjectWhitelist.WhitelistType;
-import azkaban.project.validator.ValidationReport;
-import azkaban.project.validator.ValidationStatus;
-import azkaban.project.validator.ValidatorConfigs;
-import azkaban.project.validator.ValidatorManager;
-import azkaban.project.validator.XmlValidatorManager;
-import azkaban.user.Permission;
-import azkaban.user.Permission.Type;
-import azkaban.user.User;
-import azkaban.utils.Props;
-import azkaban.utils.Utils;
 
 public class ProjectManager {
   private static final Logger logger = Logger.getLogger(ProjectManager.class);
@@ -84,11 +77,11 @@ public class ProjectManager {
     // By instantiating an object of XmlValidatorManager, this will verify the
     // config files for the validators.
     new XmlValidatorManager(prop);
-    loadAllProjects();
+    //loadAllProjects();
     loadProjectWhiteList();
   }
 
-  private void loadAllProjects() {
+  public void loadAllProjects() {
     List<Project> projects;
     try {
       projects = projectLoader.fetchAllActiveProjects();
@@ -256,8 +249,17 @@ public class ProjectManager {
         return fetchedProject;
     }
 
+    /***
+     * 这里我们新增了一个clusterGroup字段
+     * @param projectName
+     * @param description
+     * @param creator
+     * @param clusterGroup
+     * @return
+     * @throws ProjectManagerException
+     */
   public Project createProject(String projectName, String description,
-      User creator) throws ProjectManagerException {
+      User creator,String clusterGroup) throws ProjectManagerException {
     if (projectName == null || projectName.trim().isEmpty()) {
       throw new ProjectManagerException("Project name cannot be empty.");
     } else if (description == null || description.trim().isEmpty()) {
@@ -276,7 +278,7 @@ public class ProjectManager {
     logger.info("Trying to create " + projectName + " by user "
         + creator.getUserId());
     Project newProject =
-        projectLoader.createNewProject(projectName, description, creator);
+        projectLoader.createNewProject(projectName, description, creator,clusterGroup);
     projectsByName.put(newProject.getName(), newProject);
     projectsById.put(newProject.getId(), newProject);
 
@@ -596,4 +598,9 @@ public class ProjectManager {
     }
     return false;
   }
+
+    public List<Map<String,String>> getGroupCluster() throws ProjectManagerException {
+
+        return projectLoader.fetchGroupCluster();
+    }
 }

@@ -16,20 +16,13 @@
 
 package azkaban.project;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import azkaban.flow.Flow;
 import azkaban.user.Permission;
 import azkaban.user.Permission.Type;
 import azkaban.user.User;
 import azkaban.utils.Pair;
+
+import java.util.*;
 
 public class Project {
   private final int id;
@@ -41,6 +34,7 @@ public class Project {
   private long lastModifiedTimestamp;
   private String lastModifiedUser;
   private String source;
+  private String clusterGroup;//新增的属性：集群组
   private LinkedHashMap<String, Permission> userPermissionMap =
       new LinkedHashMap<String, Permission>();
   private LinkedHashMap<String, Permission> groupPermissionMap =
@@ -434,5 +428,12 @@ public class Project {
 
   public void setVersion(int version) {
     this.version = version;
+  }
+  public String getClusterGroup() {
+    return clusterGroup;
+  }
+
+  public void setClusterGroup(String clusterGroup) {
+    this.clusterGroup = clusterGroup;
   }
 }

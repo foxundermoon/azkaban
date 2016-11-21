@@ -237,16 +237,17 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
    *
    * It will throw an exception if it finds an active project of the same name,
    * or the SQL fails
+   * 这里我们做了修改，新增了一个字段clusterGroup
    */
   @Override
-  public Project createNewProject(String name, String description, User creator)
+  public Project createNewProject(String name, String description, User creator,String clusterGroup)
       throws ProjectManagerException {
     Connection connection = getConnection();
 
     Project project;
     try {
       // No need to commit, since createNewProject should commit.
-      project = createNewProject(connection, name, description, creator);
+      project = createNewProject(connection, name, description, creator,clusterGroup);
     } finally {
       DbUtils.closeQuietly(connection);
     }
@@ -255,7 +256,7 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
   }
 
   private synchronized Project createNewProject(Connection connection,
-      String name, String description, User creator)
+      String name, String description, User creator,String clusterGroup)
       throws ProjectManagerException {
     QueryRunner runner = new QueryRunner();
     ProjectResultHandler handler = new ProjectResultHandler();
@@ -278,14 +279,14 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
     }
 
     final String INSERT_PROJECT =
-        "INSERT INTO projects ( name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob) values (?,?,?,?,?,?,?,?,?)";
+        "INSERT INTO projects ( name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob,clusterGroup) values (?,?,?,?,?,?,?,?,?,?)";
     // Insert project
     try {
       long time = System.currentTimeMillis();
       int i =
           runner.update(connection, INSERT_PROJECT, name, true, time, time,
               null, creator.getUserId(), description,
-              defaultEncodingType.getNumVal(), null);
+              defaultEncodingType.getNumVal(), null,clusterGroup);
       if (i == 0) {
         throw new ProjectManagerException("No projects have been inserted.");
       }
@@ -622,7 +623,9 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
     }
   }
 
-  private void updateProjectSettings(Connection connection, Project project,
+
+
+    private void updateProjectSettings(Connection connection, Project project,
       EncodingType encType) throws ProjectManagerException {
     QueryRunner runner = new QueryRunner();
     final String UPDATE_PROJECT_SETTINGS =
@@ -1195,19 +1198,22 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
     }
   }
 
+    /**
+     * 这里我们新增了一个clusterGroup字段
+     */
   private static class ProjectResultHandler implements
       ResultSetHandler<List<Project>> {
     private static String SELECT_PROJECT_BY_NAME =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE name=?";
+        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob,clusterGroup FROM projects WHERE name=?";
 
     private static String SELECT_PROJECT_BY_ID =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE id=?";
+        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob,clusterGroup FROM projects WHERE id=?";
 
     private static String SELECT_ALL_ACTIVE_PROJECTS =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE active=true";
+        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob,clusterGroup FROM projects WHERE active=true";
 
     private static String SELECT_ACTIVE_PROJECT_BY_NAME =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE name=? AND active=true";
+        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob,clusterGroup FROM projects WHERE name=? AND active=true";
 
     @Override
     public List<Project> handle(ResultSet rs) throws SQLException {
@@ -1227,6 +1233,7 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
         String description = rs.getString(8);
         int encodingType = rs.getInt(9);
         byte[] data = rs.getBytes(10);
+        String clusterGroup=rs.getString(11);
 
         Project project;
         if (data != null) {
@@ -1259,6 +1266,7 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
         project.setVersion(version);
         project.setLastModifiedUser(lastModifiedBy);
         project.setDescription(description);
+        project.setClusterGroup(clusterGroup);
 
         projects.add(project);
       } while (rs.next());
@@ -1500,4 +1508,47 @@ public class JdbcProjectLoader extends AbstractJdbcLoader implements
 
     return connection;
   }
+  @Override
+    public List<Map<String,String>> fetchGroupCluster() throws ProjectManagerException {
+        QueryRunner runner = createQueryRunner();
+
+        ExecutorsResultsHandler handler = new ExecutorsResultsHandler();
+        try {
+            List<Map<String,String>> groupClusterList =
+                    runner.query(ExecutorsResultsHandler.SELECT_EXECUTORS, handler);
+
+            if (groupClusterList == null || groupClusterList.isEmpty()) {
+                return null;
+            }
+
+            return groupClusterList;
+        } catch (SQLException e) {
+            throw new ProjectManagerException("Error fetching clusterGroup " ,
+                    e);
+        }
+    }
+  private static class ExecutorsResultsHandler implements
+            ResultSetHandler<List<Map<String,String>>> {
+
+        private static String SELECT_EXECUTORS ="select distinct clusterGroup,clusterRemark from executors ";
+
+        @Override
+        public List<Map<String,String>> handle(ResultSet rs) throws SQLException {
+            if (!rs.next()) {
+                return Collections.<Map<String,String>> emptyList();
+            }
+
+            List< Map<String,String>> clusterGroupList = new ArrayList< Map<String,String>>();
+            do {
+                Map<String,String> map=new HashMap<String, String>();
+                String clusterGroup = rs.getString(1);
+                String clusterRemark = rs.getString(2);
+                map.put(clusterGroup,clusterRemark);
+                clusterGroupList.add(map);
+
+            } while (rs.next());
+
+            return clusterGroupList;
+        }
+    }
 }

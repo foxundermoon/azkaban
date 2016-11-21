@@ -1,5 +1,6 @@
 package azkaban.utils;
 
+import azkaban.project.ProjectManager;
 import azkaban.trigger.TriggerManager;
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.*;
@@ -41,6 +42,7 @@ public class ElectLeader implements Watcher {
     private static AbstractMailer mailer;
     private static List<String> emailList = new ArrayList<String>();
     private static boolean is_master_node=false;//是否是主节点
+    private static ProjectManager projectManager;
 
     public void startZk() throws IOException {
         zk = new ZooKeeper(connection_address, session_timeout, this);
@@ -80,6 +82,7 @@ public class ElectLeader implements Watcher {
                     state = MasterStates.ELECTED;
                     TriggerManager.isMaster = true;//开启开关，执行TriggerManager的TriggerScannerThread线程
                     ElectLeader.triggerManager.loadTriggers();//加载trigger到triggers队列和map中
+                    ElectLeader.projectManager.loadAllProjects();//加载所有的project
                     //如果当前节点为是backup，则当该节点成为leader的时候，启动一个监控:监控临时目录是否被删除
                     if(!is_master_node ){
                         checkData();
@@ -90,6 +93,7 @@ public class ElectLeader implements Watcher {
                     state = MasterStates.NOTELECTED;
                     TriggerManager.isMaster = false;//关闭开关，执行TriggerManager的TriggerScannerThread线程
                     ElectLeader.triggerManager.loadTriggers();//加载trigger到map中，不加载到triggers队列中
+                    ElectLeader.projectManager.loadAllProjects();//加载所有的project
                     // 添加Watcher
                     addMasterWatcher();
                     //如果是master，则将zookeeper上的临时目录删除
@@ -258,9 +262,10 @@ public class ElectLeader implements Watcher {
     /**
      * 向zookeeper注册节点
      */
-    public static void zkStart(Props props, TriggerManager triggerManager) {
+    public static void zkStart(Props props, TriggerManager triggerManager,ProjectManager projectManager) {
         logger.info("---zkStart---");
         ElectLeader.triggerManager = triggerManager;
+        ElectLeader.projectManager = projectManager;
         connection_address = props.getString(AZKABAN_ZOOKEEPER_CONNECTION_ADDRESS);
         znode_name = props.getString(AZKABAN_ZOOKEEPER_NODE_NAME);
         serverId = props.getString(AZKABAN_NODE_IP);

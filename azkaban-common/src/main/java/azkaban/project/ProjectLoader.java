@@ -69,7 +69,7 @@ public interface ProjectLoader {
    * @throws ProjectManagerException if an active project of the same name
    *           exists.
    */
-  public Project createNewProject(String name, String description, User creator)
+  public Project createNewProject(String name, String description, User creator,String clusterGroup)
       throws ProjectManagerException;
 
   /**
@@ -277,4 +277,10 @@ public interface ProjectLoader {
       throws ProjectManagerException;
 
   void updateProjectSettings(Project project) throws ProjectManagerException;
+    /**
+     * 获取所有的groupcluster
+     * @return
+     * @throws ProjectManagerException
+     */
+    public List<Map<String,String>> fetchGroupCluster() throws ProjectManagerException;
 }

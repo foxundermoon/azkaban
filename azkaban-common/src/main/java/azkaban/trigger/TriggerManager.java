@@ -22,6 +22,7 @@ import azkaban.event.EventHandler;
 import azkaban.event.EventListener;
 import azkaban.executor.ExecutableFlow;
 import azkaban.executor.ExecutorManager;
+import azkaban.utils.AzkabanConfigFileMonitor;
 import azkaban.utils.Props;
 import org.apache.log4j.Logger;
 
@@ -55,6 +56,9 @@ public class TriggerManager extends EventHandler implements
     private String scannerStage = "";
 
     public static boolean isMaster = false;//是否是主节点
+
+
+    private static final String   AZKABAN_OPEN_TRIGGER_SWITCH="azkaban.open.trigger.switch";
 
     public TriggerManager(Props props, TriggerLoader triggerLoader,
                           ExecutorManager executorManager) throws TriggerManagerException {
@@ -238,9 +242,11 @@ public class TriggerManager extends EventHandler implements
 
         public void run() {
 
-
             while (!shutdown) {
-                if (isMaster) {//如果当前应用是master,则执行
+
+                boolean isOpen= AzkabanConfigFileMonitor.getProps().getBoolean(AZKABAN_OPEN_TRIGGER_SWITCH, true);
+                logger.error("run method,isOpen="+isOpen);
+                if (isMaster && isOpen) {//如果当前应用是master,则执行
                     synchronized (syncObj) {
                         try {
                             logger.error(" Run the trigger manager thread !");
