@@ -173,9 +173,7 @@ azkaban.CreateProjectView = Backbone.View.extend({
     // First make sure we can upload
     var projectName = $('#path').val();
     var description = $('#description').val();
-    alert("projectName="+projectName);
     var clusterGroup= $('#clustergroup').val();
-    alert("clusterGroup="+clusterGroup);
     console.log("Creating");
     $.ajax({
       async: "false",
