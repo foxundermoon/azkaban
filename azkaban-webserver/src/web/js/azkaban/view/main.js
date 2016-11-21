@@ -132,6 +132,27 @@ azkaban.ProjectHeaderView = Backbone.View.extend({
 
   handleCreateProjectJob: function(evt) {
     $('#create-project-modal').modal();
+
+    //新增初始化的时候获取clustergroup
+    $.ajax({
+      async: "false",
+      url: "manager",
+      dataType: "json",
+      type: "POST",
+      data: {
+        action: "fetchClusterGroup"
+      },
+      success: function(data) {
+        $('#clustergroup').empty();
+        var clusterGroupList=data.clusterGroup;
+        for(var i=0;i<clusterGroupList.length;i++){
+          $.each(clusterGroupList[i], function(key, value) {
+            $("#clustergroup").append("<option value='"+key+"' >"+value+"</option>");
+          });
+
+        }
+      }
+    });
   },
 
   render: function() {
@@ -152,6 +173,9 @@ azkaban.CreateProjectView = Backbone.View.extend({
     // First make sure we can upload
     var projectName = $('#path').val();
     var description = $('#description').val();
+    alert("projectName="+projectName);
+    var clusterGroup= $('#clustergroup').val();
+    alert("clusterGroup="+clusterGroup);
     console.log("Creating");
     $.ajax({
       async: "false",
@@ -161,7 +185,8 @@ azkaban.CreateProjectView = Backbone.View.extend({
       data: {
         action: "create",
         name: projectName,
-        description: description
+        description: description,
+        clusterGroup:clusterGroup
       },
       success: function(data) {
         if (data.status == "success") {

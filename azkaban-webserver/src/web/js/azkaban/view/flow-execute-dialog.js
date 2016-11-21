@@ -172,10 +172,48 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
   },
 
   show: function(data) {
+
     var projectName = data.project;
     var flowId = data.flow;
     var jobId = data.job;
+    /*新增默认填充flow所属的集群开始*/
+    var clusterGroup=data.clusterGroup;
+    $("#parameter_table tr").each(function(i,n){
+      var tr=$(n);
+      if(tr.text().indexOf("useExecutor")>=0){
+        tr.remove();
+      }
+    });
 
+    //新增初始化的时候获取clustergroup
+    $.ajax({
+      async: "false",
+      url: "manager",
+      dataType: "json",
+      type: "POST",
+      data: {
+        action: "fetchClusterGroup"
+      },
+      success: function(data) {
+
+        flowExecuteDialogView.addClusterRow(data,clusterGroup);
+      }
+    });
+    //移除包含useExecutor行
+    /* $("#parameter_table tr").each(function(i,n){
+     var tr=$(n);
+     if(tr.text().indexOf("useExecutor")>=0){
+     tr.remove();
+     }
+     });
+     var clusterGroup=data.clusterGroup;
+     var name="useExecutor";
+     var data1= {
+     paramkey: name,
+     paramvalue: clusterGroup
+     };
+     editTableView.handleAddRow(data1);*/
+    /*新增默认填充flow所属的集群结束*/
     // ExecId is optional
     var execId = data.execid;
     var exgraph = data.exgraph;
@@ -197,7 +235,63 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
     this.loadGraph(projectName, flowId, exgraph, loadCallback);
     this.loadFlowInfo(projectName, flowId, execId);
   },
+  addClusterRow: function(data,clusterGroup) {
+    var name = "useExecutor";
+    var clusterGroupList=data.clusterGroup;
 
+    var selectName=document.createElement("select");
+    $(selectName).addClass("select-cluster form-control-auto");
+    for(var i=0;i<clusterGroupList.length;i++){
+      $.each(clusterGroupList[i], function(key, value) {
+        if(key==clusterGroup){
+          $(selectName).append("<option value='"+key+"' selected>"+value+"</option>");
+        }else{
+          $(selectName).append("<option value='"+key+"' >"+value+"</option>");
+        }
+      });
+
+    }
+
+    var tr = document.createElement("tr");
+    var tdName = document.createElement("td");
+    $(tdName).addClass('property-key');
+    var tdValue = document.createElement("td");
+
+    var remove = document.createElement("div");
+    $(remove).addClass("pull-right").addClass('remove-btn');
+    var removeBtn = document.createElement("button");
+    $(removeBtn).attr('type', 'button');
+    $(removeBtn).addClass('btn').addClass('btn-xs').addClass('btn-danger');
+    $(removeBtn).text('Delete');
+    $(remove).append(removeBtn);
+
+    var nameData = document.createElement("span");
+    $(nameData).addClass("spanValue");
+    $(nameData).text(name);
+    var valueData = document.createElement("span");
+    $(valueData).addClass("spanValue");
+    $(valueData).css("display","none");
+    $(valueData).text(clusterGroup);//下拉框默认值作为text
+    //下拉框change事件：将选中值作为span的text
+    $(selectName).change(function(){
+      $(valueData).text($(this).val());
+    });
+
+    $(tdName).append(nameData);
+    $(tdName).addClass("editable");
+
+    $(tdValue).append(selectName);
+    $(tdValue).append(valueData);
+    $(tdValue).append(remove);
+    //$(tdValue).addClass("editable").addClass('value');
+
+    $(tr).addClass("editRow");
+    $(tr).append(tdName);
+    $(tr).append(tdValue);
+
+    $(tr).insertBefore(".addRow");
+    return tr;
+  },
   showExecuteFlow: function(projectName, flowId) {
     $("#execute-flow-panel-title").text("Execute Flow " + flowId);
     this.showExecutionOptionPanel();
@@ -254,10 +348,10 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
     var graphModel = executableGraphModel;
     // fetchFlow(this.model, projectName, flowId, true);
     var requestData = {
-        "project": projectName,
-        "ajax": "fetchflowgraph",
-        "flow": flowId
-      };
+      "project": projectName,
+      "ajax": "fetchflowgraph",
+      "flow": flowId
+    };
     var self = this;
     var successHandler = function(data) {
       console.log("data fetched");
@@ -321,6 +415,7 @@ azkaban.EditTableView = Backbone.View.extend({
   },
 
   initialize: function(setting) {
+
   },
 
   handleAddRow: function(data) {
@@ -645,8 +740,8 @@ var expanelNodeClickCallback = function(event, model, node) {
   else {
     var requestURL = contextURL + "/manager?project=" + projectName + "&flow=" + flowId + "&job=" + jobId;
     menu = [
-        {title: "Open Job in New Window...", callback: function() {window.open(requestURL);}},
-      ];
+      {title: "Open Job in New Window...", callback: function() {window.open(requestURL);}},
+    ];
   }
 
   $.merge(menu, [
@@ -707,7 +802,6 @@ $(function() {
   editTableView = new azkaban.EditTableView({
     el: $('#editTable')
   });
-
   contextMenuView = new azkaban.ContextMenuView({
     el: $('#contextMenu')
   });

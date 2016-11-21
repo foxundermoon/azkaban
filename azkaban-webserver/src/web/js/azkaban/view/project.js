@@ -221,15 +221,18 @@ azkaban.FlowTableView = Backbone.View.extend({
   executeFlow: function(evt) {
     console.log("Execute Flow");
     var flowId = $(evt.currentTarget).attr('flowid');
+    var clusterGroup = $(evt.currentTarget).attr('clusterGroup');
 
     var executingData = {
       project: projectName,
       ajax: "executeFlow",
-      flow: flowId
+      flow: flowId,
+      clusterGroup:clusterGroup
     };
 
     this.executeFlowDialog(executingData);
   },
+
 
   executeFlowDialog: function(executingData) {
     flowExecuteDialogView.show(executingData);
