@@ -177,6 +177,8 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
       String action = getParam(req, "action");
       if (action.equals("create")) {
         handleCreate(req, resp, session);
+      }else if(action.equals("fetchClusterGroup")){
+        ajaxFetchClusterGroup(req, resp, session);
       }
     }
   }
@@ -187,7 +189,7 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
     String projectName = getParam(req, "project");
     User user = session.getUser();
 
-    HashMap<String, Object> ret = new HashMap<>();
+    HashMap<String, Object> ret = new HashMap<String, Object>();
     ret.put("project", projectName);
 
     Project project = projectManager.getProject(projectName);
@@ -270,7 +272,8 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
         if (handleAjaxPermission(project, user, Type.WRITE, ret)) {
           ajaxSetJobOverrideProperty(project, ret, req);
         }
-      } else {
+      }
+     else {
         ret.put("error", "Cannot execute command " + ajaxName);
       }
     }
@@ -303,7 +306,7 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
     String[] columns = new String[] { "user", "time", "type", "message" };
     ret.put("columns", columns);
 
-    List<Object[]> eventData = new ArrayList<>();
+    List<Object[]> eventData = new ArrayList<Object[]>();
     for (ProjectLogEvent events : logEvents) {
       Object[] entry = new Object[4];
       entry[0] = events.getUser();
@@ -1581,6 +1584,8 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
     String projectName = hasParam(req, "name") ? getParam(req, "name") : null;
     String projectDescription =
         hasParam(req, "description") ? getParam(req, "description") : null;
+    String clusterGroup= hasParam(req, "clusterGroup") ? getParam(req, "clusterGroup") : null;//工程默认执行集群
+
     logger.info("Create project " + projectName);
 
     User user = session.getUser();
@@ -1601,7 +1606,7 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
       status = "error";
     } else {
       try {
-        projectManager.createProject(projectName, projectDescription, user);
+        projectManager.createProject(projectName, projectDescription, user,clusterGroup);
         status = "success";
         action = "redirect";
         String redirect = "manager?project=" + projectName;
@@ -1766,6 +1771,50 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
     resp.sendRedirect(req.getRequestURI() + "?project=" + projectName);
   }
 
+  /**
+   * 获取executor表配置的clustergroup
+   */
+  private void  ajaxFetchClusterGroup( HttpServletRequest req, HttpServletResponse resp,
+                                       Session session) throws ServletException {
+
+      String status = null;
+      String message = null;
+      List<Map<String,String>> clusterGroupList=null;
+      try {
+        clusterGroupList=projectManager.getGroupCluster();
+      } catch (ProjectManagerException e) {
+        message = e.getMessage();
+        status = "error";
+      }
+
+
+    HashMap<String, Object> response = new HashMap<String, Object>();
+    response.put("status", status);
+
+    if (clusterGroupList.size() == 0) {
+      message = "Did not get to clusterGroup.";
+      status = "error";
+    }else{
+      response.put("clusterGroup",clusterGroupList);
+      status = "sueccess";
+      message="";
+    }
+    if (message != null) {
+      response.put("message", message);
+    }
+
+    try {
+      resp.setContentType("text/html;charset=UTF-8");
+      Writer write = resp.getWriter();
+      write.append(JSONUtils.toJSON(response));
+      write.flush();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+
+  }
+
   private static class NodeLevelComparator implements Comparator<Node> {
     @Override
     public int compare(Node node1, Node node2) {
@@ -1874,4 +1923,6 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
 
     return false;
   }
+
+
 }

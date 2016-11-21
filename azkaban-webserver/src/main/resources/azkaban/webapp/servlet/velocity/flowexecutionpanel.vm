@@ -146,7 +146,7 @@
                         <ul>
                           <li>Level 1: block job A until the previous flow job A has completed.</li>
                           <li>Level 2: block job A until the previous flow job A's children have completed.</li>
-                        </li>
+                        </ul>
                       </span>
                     </div>
                   </div>
@@ -157,7 +157,7 @@
                     <h4>Flow Property Override</h4>
                     <hr>
                     <div id="editTable">
-                      <table class="table table-striped">
+                      <table class="table table-striped" id="parameter_table">
                         <thead>
                           <tr>
                             <th class="property-key">Name</th>

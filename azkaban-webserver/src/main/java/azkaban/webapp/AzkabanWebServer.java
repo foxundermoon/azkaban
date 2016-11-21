@@ -652,6 +652,7 @@ public class AzkabanWebServer extends AzkabanServer {
    */
   public static void main(String[] args) throws Exception {
     logger.info("Starting Jetty Azkaban Web Server...");
+
     Props azkabanSettings = AzkabanServer.loadProps(args);
 
     if (azkabanSettings == null) {
@@ -773,9 +774,10 @@ public class AzkabanWebServer extends AzkabanServer {
     String viewerPluginDir =
         azkabanSettings.getString("viewer.plugin.dir", "plugins/viewer");
     loadViewerPlugins(root, viewerPluginDir, app.getVelocityEngine());
-
+    //监控配置文件是否发生修改
+    AzkabanConfigFileMonitor.azkabanConfigFileMonitor(args,azkabanSettings);
     //向zookeeper注册节点
-    ElectLeader.zkStart(azkabanSettings,app.getTriggerManager());
+    ElectLeader.zkStart(azkabanSettings,app.getTriggerManager(),app.getProjectManager());
 
     // triggerplugin
     String triggerPluginDir =
