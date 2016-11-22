@@ -172,12 +172,40 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
   },
 
   show: function(data) {
-
     var projectName = data.project;
     var flowId = data.flow;
     var jobId = data.job;
+
+    // ExecId is optional
+    var execId = data.execid;
+    var exgraph = data.exgraph;
+
+    this.projectName = projectName;
+    this.flowId = flowId;
     /*新增默认填充flow所属的集群开始*/
-    var clusterGroup=data.clusterGroup;
+    if(execId==null){
+      var clusterGroup=data.clusterGroup;
+      flowExecuteDialogView.getClusterInfo(clusterGroup);
+    }
+    /*新增默认填充flow所属的集群结束*/
+
+    var self = this;
+    var loadCallback = function() {
+      if (jobId) {
+        self.showExecuteJob(projectName, flowId, jobId, data.withDep);
+      }
+      else {
+        self.showExecuteFlow(projectName, flowId);
+      }
+    }
+
+    var loadedId = executableGraphModel.get("flowId");
+    this.loadGraph(projectName, flowId, exgraph, loadCallback);
+    this.loadFlowInfo(projectName, flowId, execId);
+  },
+
+  getClusterInfo:function(clusterGroup){
+
     $("#parameter_table tr").each(function(i,n){
       var tr=$(n);
       if(tr.text().indexOf("useExecutor")>=0){
@@ -195,46 +223,11 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
         action: "fetchClusterGroup"
       },
       success: function(data) {
-
         flowExecuteDialogView.addClusterRow(data,clusterGroup);
       }
     });
-    //移除包含useExecutor行
-    /* $("#parameter_table tr").each(function(i,n){
-     var tr=$(n);
-     if(tr.text().indexOf("useExecutor")>=0){
-     tr.remove();
-     }
-     });
-     var clusterGroup=data.clusterGroup;
-     var name="useExecutor";
-     var data1= {
-     paramkey: name,
-     paramvalue: clusterGroup
-     };
-     editTableView.handleAddRow(data1);*/
-    /*新增默认填充flow所属的集群结束*/
-    // ExecId is optional
-    var execId = data.execid;
-    var exgraph = data.exgraph;
-
-    this.projectName = projectName;
-    this.flowId = flowId;
-
-    var self = this;
-    var loadCallback = function() {
-      if (jobId) {
-        self.showExecuteJob(projectName, flowId, jobId, data.withDep);
-      }
-      else {
-        self.showExecuteFlow(projectName, flowId);
-      }
-    }
-
-    var loadedId = executableGraphModel.get("flowId");
-    this.loadGraph(projectName, flowId, exgraph, loadCallback);
-    this.loadFlowInfo(projectName, flowId, execId);
   },
+
   addClusterRow: function(data,clusterGroup) {
     var name = "useExecutor";
     var clusterGroupList=data.clusterGroup;
@@ -419,6 +412,8 @@ azkaban.EditTableView = Backbone.View.extend({
   },
 
   handleAddRow: function(data) {
+
+
     var name = "";
     if (data.paramkey) {
       name = data.paramkey;
@@ -428,7 +423,11 @@ azkaban.EditTableView = Backbone.View.extend({
     if (data.paramvalue) {
       value = data.paramvalue;
     }
-
+    //以下我们进行了修改：如果参数名称为useExecutor，则调用getClusterInfo进行新增row
+    if(name=="useExecutor"){
+      flowExecuteDialogView.getClusterInfo(value);
+      return;
+    }
     var tr = document.createElement("tr");
     var tdName = document.createElement("td");
     $(tdName).addClass('property-key');
