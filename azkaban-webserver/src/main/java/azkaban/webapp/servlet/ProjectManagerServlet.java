@@ -191,9 +191,7 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
         }
     }
 
-    private void handleAJAXAction(HttpServletRequest req,
-                                  HttpServletResponse resp, Session session) throws ServletException,
-            IOException {
+    private void handleAJAXAction(HttpServletRequest req, HttpServletResponse resp, Session session) throws ServletException, IOException {
         String projectName = getParam(req, "project");
         User user = session.getUser();
 
@@ -1783,35 +1781,23 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
      */
     private void ajaxFetchClusterGroup(HttpServletRequest req, HttpServletResponse resp,
                                        HashMap<String, Object> ret) throws ServletException {
-
-        String status = null;
-        String message = null;
-        List<Map<String, String>> clusterGroupList = null;
+        List<Map<String, String>> clusterGroupList;
         try {
             clusterGroupList = projectManager.getGroupCluster();
         } catch (ProjectManagerException e) {
-            message = e.getMessage();
-            status = "error";
-            ret.put("message", message);
-            ret.put("status", status);
+            logger.error("ajaxFetchClusterGroup error, error=" + e.getMessage());
+            ret.put("message", e.getMessage());
+            ret.put("status", "error");
             return;
         }
 
-        if (clusterGroupList != null) {
-            if (clusterGroupList.size() == 0) {
-                message = "Did not get to clusterGroup.";
-                status = "error";
-            } else {
-                ret.put("clusterGroup", clusterGroupList);
-                status = "sueccess";
-                message = "";
-            }
-            if (message != null) {
-                ret.put("message", message);
-            }
+        if (clusterGroupList != null && clusterGroupList.size() > 0) {
+            ret.put("clusterGroup", clusterGroupList);
+            ret.put("status", "success");
+        } else {
+            ret.put("message", "Did not get clusterGroups Information");
+            ret.put("status", "error");
         }
-        ret.put("status", status);
-
     }
 
     private static class NodeLevelComparator implements Comparator<Node> {
