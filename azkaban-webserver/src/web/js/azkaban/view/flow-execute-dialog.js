@@ -206,23 +206,30 @@ azkaban.FlowExecuteDialogView = Backbone.View.extend({
 
   getClusterInfo:function(clusterGroup){
 
+    var flag=0;
     $("#parameter_table tr").each(function(i,n){
       var tr=$(n);
       if(tr.text().indexOf("useExecutor")>=0){
-        tr.remove();
+        flag=1;
       }
     });
+
+    if(flag==1){
+      return;
+    }
+
 
     //新增初始化的时候获取clustergroup
     $.ajax({
       async: "false",
       url: "manager",
       dataType: "json",
-      type: "POST",
+      type: "GET",
       data: {
-        action: "fetchClusterGroup"
+        ajax: "fetchClusterGroup"
       },
       success: function(data) {
+
         flowExecuteDialogView.addClusterRow(data,clusterGroup);
       }
     });
@@ -413,7 +420,6 @@ azkaban.EditTableView = Backbone.View.extend({
 
   handleAddRow: function(data) {
 
-
     var name = "";
     if (data.paramkey) {
       name = data.paramkey;
@@ -423,8 +429,9 @@ azkaban.EditTableView = Backbone.View.extend({
     if (data.paramvalue) {
       value = data.paramvalue;
     }
+
     //以下我们进行了修改：如果参数名称为useExecutor，则调用getClusterInfo进行新增row
-    if(name=="useExecutor"){
+    if(name=="useExecutor" && isNaN(value)){
       flowExecuteDialogView.getClusterInfo(value);
       return;
     }

@@ -138,9 +138,9 @@ azkaban.ProjectHeaderView = Backbone.View.extend({
       async: "false",
       url: "manager",
       dataType: "json",
-      type: "POST",
+      type: "GET",
       data: {
-        action: "fetchClusterGroup"
+        ajax: "fetchClusterGroup"
       },
       success: function(data) {
         $('#clustergroup').empty();
@@ -222,9 +222,9 @@ $(function() {
   });
 
   /*tableSorterView = new azkaban.TableSorter({
-    el: $('#all-jobs'),
-    initialSort: $('.tb-name')
-  });*/
+   el: $('#all-jobs'),
+   initialSort: $('.tb-name')
+   });*/
 
   uploadView = new azkaban.CreateProjectView({
     el: $('#create-project-modal')
